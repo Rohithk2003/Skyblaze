@@ -132,11 +132,10 @@ name = []
 def crash12(playerimage, score):
     win.blit(crashimage, (0, 0))
     font = pygame.font.Font('Consolas.ttf', 40)
-    f = open('hello.txt', 'r')
-    line = f.readlines()
-    p = ' '
-    for i in line:
-        p = i + '-score:'
+
+    p = ''
+    for i in name:
+        p = i + ' score:'
     a = font.render(p + str(score), True, white)
     win.blit(a, (10, 10))
     while True:
