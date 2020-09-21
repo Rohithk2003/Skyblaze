@@ -21,7 +21,7 @@ player_size = player.get_size()
 c, d = player_size
 # converted to images to rect
 pause = False
-basic_font = pygame.font.Font('Consolas.ttf', 32)
+basic_font = pygame.font.Font('comic.ttf', 32)
 user_text = ' '
 bullet2 = bullet3.get_rect()
 rect = player.get_rect()
