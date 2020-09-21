@@ -2,8 +2,9 @@
 import random
 import sys
 import time
+
 import pygame
-import os
+
 clock = time.clock()
 # initiating pygame
 pygame.init()
@@ -34,7 +35,7 @@ rect1 = back.get_rect()
 rect1.x = w
 rect1.y = 0
 # loaded intro background
-user_text1=' '
+user_text1 = ' '
 gameintro1 = pygame.image.load('background.png')
 rect2 = back1.get_rect()
 rect2.x = 0
@@ -96,7 +97,6 @@ def controls(playerimage):
             if events.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-                os.remove('hello.txt')
         mouse = pygame.mouse.get_pos()
         if 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450:
             pygame.draw.rect(win, low_black, (420, 450, 150, 50))
@@ -122,12 +122,10 @@ def controls(playerimage):
             pygame.mixer.Sound.play(button)
             pygame.quit()
             sys.exit()
-            os.remove('hello.txt')
         pygame.display.update()
 
 
 name = []
-
 
 
 # created a crash function to display when crashed
@@ -146,7 +144,6 @@ def crash12(playerimage, score):
             if events.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-                os.remove('hello.txt')
         mouse = pygame.mouse.get_pos()
         if 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450:
             pygame.draw.rect(win, low_black, (420, 450, 150, 50))
@@ -172,7 +169,6 @@ def crash12(playerimage, score):
             pygame.mixer.Sound.play(button)
             pygame.quit()
             sys.exit()
-            os.remove('hello.txt')
         pygame.display.update()
 
 
@@ -222,11 +218,14 @@ def message_display2(text, a, b, color):
 def crash1():
     message_display1('War Birds', display_height / 2, 300, k)
 
+
 def someting():
-    f=open('hello.txt','r')
-    line=f.readlines()
+    f = open('hello.txt', 'r')
+    line = f.readlines()
     for i in line:
         print(i)
+
+
 def escape(playerimage):
     global lvl1
     while pause:
@@ -234,7 +233,6 @@ def escape(playerimage):
             if events.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-                os.remove('hello.txt')
         win.fill(white)
         message_display2('Paused', display_height / 2, 300, k)
         keys = pygame.key.get_pressed()
@@ -278,7 +276,6 @@ def escape(playerimage):
             pygame.mixer.Sound.play(button)
             pygame.quit()
             sys.exit()
-            os.remove('hello.txt')
         elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
             pygame.mixer.Sound.play(button)
             playerinput1(playerimage)
@@ -287,54 +284,6 @@ def escape(playerimage):
 
 active = False
 
-
-def playerinput1(playerimage):
-    global active
-    color = black
-    global user_text1
-    while True:
-        win.fill(white)
-        message_display2('Please Enter Your name:', 500, 200, black)
-        a = 100
-        d = 50
-        rect_x = 450
-        rect_y = 300
-        text_surface = basic_font.render(user_text1, True, green)
-        win.blit(text_surface, (rect_x - 1, rect_y + 7))
-        a = max(100, text_surface.get_width() + 10)
-        p = pygame.draw.rect(win, color, (rect_x, rect_y, a, d), 2)
-        for events in pygame.event.get():
-            if events.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-                os.remove('hello.txt')
-            if events.type == pygame.MOUSEBUTTONDOWN:
-                if p.collidepoint(events.pos):
-                    active = True
-                    color = blue
-                else:
-                    active = False
-                    color = black
-            if events.type == pygame.KEYDOWN:
-                if active == True:
-                    if events.key == pygame.K_BACKSPACE:
-                        user_text1 = user_text1[:-1]
-                    else:
-                        user_text1 += events.unicode
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_RETURN]:
-                if user_text != ' ':
-                    name.append(user_text1)
-                    f = open('hello.txt', 'a')
-                    for i in name:
-                        f.write(i)
-
-                    f.close()
-
-                    gameloop(playerimage)
-                else:
-                    pass
-            pygame.display.update()
 
 def playerinput(playerimage):
     global active
@@ -355,7 +304,6 @@ def playerinput(playerimage):
             if events.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-                os.remove('hello.txt')
             if events.type == pygame.MOUSEBUTTONDOWN:
                 if p.collidepoint(events.pos):
                     active = True
@@ -373,7 +321,7 @@ def playerinput(playerimage):
             if keys[pygame.K_RETURN]:
                 if user_text != ' ':
                     name.append(user_text)
-                    f = open('hello.txt', 'a')
+                    f = open('hello.txt', 'w')
                     for i in name:
                         f.write(i)
 
@@ -405,7 +353,6 @@ def gameintro(playerimage):
             if events.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-                os.remove('hello.txt')
 
         crash1()
         keys = pygame.key.get_pressed()
@@ -447,7 +394,8 @@ def gameintro(playerimage):
             gameloop(playerimage)
         elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50 or keys[pygame.K_q]:
             pygame.mixer.Sound.play(button)
-            someting()
+            pygame.quit()
+            quit()
         elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
             pygame.mixer.Sound.play(button)
             controls(playerimage)
@@ -460,7 +408,7 @@ def won(playerimage):
     pygame.mixer.music.pause()
     i = 1000
     while i > 100:
-        message_display2('You win', display_height / 2, display_width / 2, white)
+        message_display('You won Congrats', display_height / 2, display_width / 2, white)
         pygame.display.update()
         i = i - 1
     gameloop2(playerimage)
@@ -500,7 +448,6 @@ def gameloop2(playerimage):
             if events.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-                os.remove('hello.txt')
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
@@ -566,7 +513,6 @@ def gameloop(playerimage):  # mainloop
             if events.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-                os.remove('hello.txt')
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_DOWN]:
@@ -611,4 +557,3 @@ def gameloop(playerimage):  # mainloop
 # called the function gameintro
 clock.tick(50)
 playerinput(player)
-os.remove('hello.txt')
