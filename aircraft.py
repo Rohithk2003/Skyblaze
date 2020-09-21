@@ -36,7 +36,7 @@ rect1.x = w
 rect1.y = 0
 # loaded intro background
 user_text1 = ' '
-gameintro1 = pygame.image.load('background.png')
+game_intro = pygame.image.load('background.png')
 rect2 = back1.get_rect()
 rect2.x = 0
 rect2.y = 0
@@ -48,15 +48,15 @@ k = (118, 131, 0)
 black = 0, 0, 0
 white = (255, 255, 255)
 unknown = (27, 5, 102)
-brightgreen = (0, 200, 0)
-brightred = (200, 0, 0)
-brightblue = (0, 0, 200)
+bright_green = (0, 200, 0)
+bright_red = (200, 0, 0)
+bright_blue = (0, 0, 200)
 cloud1 = []
 low_black = (26, 25, 27)
 light_black = (43, 43, 45)
 num = 5
 button = pygame.mixer.Sound('BUTTON.wav')
-pygame.mixer.music.load('Electro Fight - Kwon.mp3')
+pygame.mixer.music.load('music.mp3')
 crash_sound = pygame.mixer.Sound('crash.wav')
 cloud_x = [534, 124, 654, 856, 123, 645]
 cloud_y = [534, 124, 321, 546, 123, 491]
@@ -79,7 +79,6 @@ for i in range(POL - 1):
 bullet_x = []
 bullet_state = 'ready'
 bullet_state1 = 'ready'
-list = []
 
 
 # created control button for ease of use
@@ -88,87 +87,7 @@ def unpaused():
     pause = False
 
 
-def controls(playerimage):
-    win.fill(white)
-    message_display2('USE arrow or WA  keys to move', 500, 350, black)
-
-    while True:
-        for events in pygame.event.get():
-            if events.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-        mouse = pygame.mouse.get_pos()
-        if 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450:
-            pygame.draw.rect(win, low_black, (420, 450, 150, 50))
-            message_display2('Play ', (420 + 420 + 150) / 2, (450 + 450 + 50) / 2, black)
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
-            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
-        elif 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
-            pygame.draw.rect(win, light_black, (420, 450, 150, 50))
-            pygame.draw.rect(win, low_black, (420, 520, 150, 50))
-            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
-            message_display2('Play ', (420 + 420 + 150) / 2, (450 + 450 + 50) / 2, black)
-        else:
-            pygame.draw.rect(win, light_black, (420, 450, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
-            message_display2('Play ', (420 + 420 + 150) / 2, (450 + 450 + 50) / 2, black)
-            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
-        click = pygame.mouse.get_pressed()
-        if click[0] == 1 and 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450:
-            pygame.mixer.Sound.play(button)
-            pygame.mixer.music.unpause()
-            gameloop(playerimage)
-        elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
-            pygame.mixer.Sound.play(button)
-            pygame.quit()
-            sys.exit()
-        pygame.display.update()
-
-
 name = []
-
-
-# created a crash function to display when crashed
-def crash12(playerimage, score):
-    win.blit(crashimage, (0, 0))
-    font = pygame.font.Font('Consolas.ttf', 40)
-
-    p = ''
-    for i in name:
-        p = i + ' score:'
-    a = font.render(p + str(score), True, white)
-    win.blit(a, (10, 10))
-    while True:
-        for events in pygame.event.get():
-            if events.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-        mouse = pygame.mouse.get_pos()
-        if 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450:
-            pygame.draw.rect(win, low_black, (420, 450, 150, 50))
-            message_display2('Play Again', (420 + 420 + 150) / 2, (450 + 450 + 50) / 2, black)
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
-            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
-        elif 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
-            pygame.draw.rect(win, light_black, (420, 450, 150, 50))
-            pygame.draw.rect(win, low_black, (420, 520, 150, 50))
-            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
-            message_display2('Play Again', (420 + 420 + 150) / 2, (450 + 450 + 50) / 2, black)
-        else:
-            pygame.draw.rect(win, light_black, (420, 450, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
-            message_display2('Play Again', (420 + 420 + 150) / 2, (450 + 450 + 50) / 2, black)
-            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
-        click = pygame.mouse.get_pressed()
-        if click[0] == 1 and 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450:
-            pygame.mixer.Sound.play(button)
-            pygame.mixer.music.unpause()
-            gameloop(playerimage)
-        elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
-            pygame.mixer.Sound.play(button)
-            pygame.quit()
-            sys.exit()
-        pygame.display.update()
 
 
 # create a function to fire bullet
@@ -225,62 +144,50 @@ def someting():
         print(i)
 
 
-def escape(playerimage):
-    global lvl1
-    while pause:
+active = False
+
+
+# created a crash function to display when crashed
+def crash12(playerimage, score):
+    win.blit(crashimage, (0, 0))
+    font = pygame.font.Font('Consolas.ttf', 40)
+
+    p = ''
+    for i in name:
+        p = i + ' score:'
+    input_name = font.render(p + str(score), True, white)
+    win.blit(input_name, (10, 10))
+    while True:
         for events in pygame.event.get():
             if events.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        message_display2('Paused', display_height / 2, 300, k)
-        keys = pygame.key.get_pressed()
         mouse = pygame.mouse.get_pos()
-        message_display2('  Press s to Start', 300, 678, k)
-        message_display2('                          Press q to Quit', 520, 678, k)
-        if 420 < mouse[0] < 420 + 150 and 460 < mouse[1] < 50 + 460:
-            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
-            pygame.draw.rect(win, low_black, (420, 460, 150, 50))
+        if 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450:
+            pygame.draw.rect(win, low_black, (420, 450, 150, 50))
+            message_display2('Play Again', (420 + 420 + 150) / 2, (450 + 450 + 50) / 2, black)
             pygame.draw.rect(win, light_black, (420, 520, 150, 50))
-            message_display2('Continue', (420 + 420 + 150) / 2, (460 + 460 + 50) / 2, black)
             message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
-            message_display2('Controls', (420 + 420 + 150) / 2, (580 + 580 + 50) / 2, black)
         elif 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
-            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
+            pygame.draw.rect(win, light_black, (420, 450, 150, 50))
             pygame.draw.rect(win, low_black, (420, 520, 150, 50))
-            message_display2('Controls', (420 + 420 + 150) / 2, (580 + 580 + 50) / 2, black)
             message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
-            message_display2('Continue', (420 + 420 + 150) / 2, (460 + 460 + 50) / 2, black)
-        elif 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
-            pygame.draw.rect(win, low_black, (420, 580, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
-            message_display2('Controls', (420 + 420 + 150) / 2, (580 + 580 + 50) / 2, black)
-            message_display2('Continue', (420 + 420 + 150) / 2, (460 + 460 + 50) / 2, black)
-            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
+            message_display2('Play Again', (420 + 420 + 150) / 2, (450 + 450 + 50) / 2, black)
         else:
-            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
+            pygame.draw.rect(win, light_black, (420, 450, 150, 50))
             pygame.draw.rect(win, light_black, (420, 520, 150, 50))
-            message_display2('view scoreboard', (420 + 420 + 150) / 2, (580 + 580 + 50) / 2, black)
-            message_display2('Continue', (420 + 420 + 150) / 2, (460 + 460 + 50) / 2, black)
+            message_display2('Play Again', (420 + 420 + 150) / 2, (450 + 450 + 50) / 2, black)
             message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
         click = pygame.mouse.get_pressed()
-        if click[0] == 1 and 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450 or keys[pygame.K_s]:
+        if click[0] == 1 and 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450:
             pygame.mixer.Sound.play(button)
             pygame.mixer.music.unpause()
-            unpaused()
-        elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50 or keys[pygame.K_q]:
+            gameloop(playerimage)
+        elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
             pygame.mixer.Sound.play(button)
             pygame.quit()
             sys.exit()
-        elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
-            pygame.mixer.Sound.play(button)
-            playerinput1(playerimage)
         pygame.display.update()
-
-
-active = False
 
 
 def playerinput(playerimage):
@@ -338,6 +245,58 @@ def scoreimage(text):
 
 
 # created a game intro scene to initialize start of the game
+def escape(playerimage):
+    global lvl1
+    while pause:
+        for events in pygame.event.get():
+            if events.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+        message_display2('Paused', display_height / 2, 300, k)
+        keys = pygame.key.get_pressed()
+        mouse = pygame.mouse.get_pos()
+        message_display2('  Press s to Start', 300, 678, k)
+        message_display2('                          Press q to Quit', 520, 678, k)
+        if 420 < mouse[0] < 420 + 150 and 460 < mouse[1] < 50 + 460:
+            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
+            pygame.draw.rect(win, low_black, (420, 460, 150, 50))
+            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            message_display2('Continue', (420 + 420 + 150) / 2, (460 + 460 + 50) / 2, black)
+            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
+            message_display2('Controls', (420 + 420 + 150) / 2, (580 + 580 + 50) / 2, black)
+        elif 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
+            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
+            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
+            pygame.draw.rect(win, low_black, (420, 520, 150, 50))
+            message_display2('Controls', (420 + 420 + 150) / 2, (580 + 580 + 50) / 2, black)
+            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
+            message_display2('Continue', (420 + 420 + 150) / 2, (460 + 460 + 50) / 2, black)
+        elif 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
+            pygame.draw.rect(win, low_black, (420, 580, 150, 50))
+            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
+            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            message_display2('Controls', (420 + 420 + 150) / 2, (580 + 580 + 50) / 2, black)
+            message_display2('Continue', (420 + 420 + 150) / 2, (460 + 460 + 50) / 2, black)
+            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
+        else:
+            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
+            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
+            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            message_display2('view scoreboard', (420 + 420 + 150) / 2, (580 + 580 + 50) / 2, black)
+            message_display2('Continue', (420 + 420 + 150) / 2, (460 + 460 + 50) / 2, black)
+            message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
+        click = pygame.mouse.get_pressed()
+        if click[0] == 1 and 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450 or keys[pygame.K_s]:
+            pygame.mixer.Sound.play(button)
+            pygame.mixer.music.unpause()
+            unpaused()
+        elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50 or keys[pygame.K_q]:
+            pygame.mixer.Sound.play(button)
+            pygame.quit()
+            sys.exit()
+        elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
+            pygame.mixer.Sound.play(button)
+        pygame.display.update()
 
 
 def gameintro(playerimage):
@@ -345,7 +304,7 @@ def gameintro(playerimage):
     global user_text
 
     while True:
-        win.blit(gameintro1, (0, 0))
+        win.blit(game_intro, (0, 0))
 
         for events in pygame.event.get():
             if events.type == pygame.QUIT:
