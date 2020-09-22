@@ -69,8 +69,8 @@ for i in range(num - 1):
 bulletlist = []
 bulletx = []
 bullety = []
-POL = 9
-for i in range(POL - 1):
+num_bullet = 9
+for i in range(num_bullet - 1):
     bulletlist.append(pygame.image.load('bullet1.png'))
     a = random.randint(1000, 1500)
     b = random.randint(0, 650)
@@ -79,7 +79,6 @@ for i in range(POL - 1):
 bullet_x = []
 bullet_state = 'ready'
 bullet_state1 = 'ready'
-
 
 # created control button for ease of use
 def unpaused():
@@ -255,8 +254,6 @@ def escape(playerimage):
         message_display2('Paused', display_height / 2, 300, k)
         keys = pygame.key.get_pressed()
         mouse = pygame.mouse.get_pos()
-        message_display2('  Press s to Start', 300, 678, k)
-        message_display2('                          Press q to Quit', 520, 678, k)
         if 420 < mouse[0] < 420 + 150 and 460 < mouse[1] < 50 + 460:
             pygame.draw.rect(win, light_black, (420, 580, 150, 50))
             pygame.draw.rect(win, low_black, (420, 460, 150, 50))
@@ -282,15 +279,15 @@ def escape(playerimage):
             pygame.draw.rect(win, light_black, (420, 580, 150, 50))
             pygame.draw.rect(win, light_black, (420, 460, 150, 50))
             pygame.draw.rect(win, light_black, (420, 520, 150, 50))
-            message_display2('view scoreboard', (420 + 420 + 150) / 2, (580 + 580 + 50) / 2, black)
+            message_display2('Controls', (420 + 420 + 150) / 2, (580 + 580 + 50) / 2, black)
             message_display2('Continue', (420 + 420 + 150) / 2, (460 + 460 + 50) / 2, black)
             message_display2('Quit', (420 + 420 + 150) / 2, (520 + 520 + 50) / 2, black)
         click = pygame.mouse.get_pressed()
-        if click[0] == 1 and 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450 or keys[pygame.K_s]:
+        if click[0] == 1 and 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450 :
             pygame.mixer.Sound.play(button)
             pygame.mixer.music.unpause()
             unpaused()
-        elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50 or keys[pygame.K_q]:
+        elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50 :
             pygame.mixer.Sound.play(button)
             pygame.quit()
             sys.exit()
@@ -394,13 +391,10 @@ def gameloop2(playerimage):
     player_speed = 7
     cloud_speed = 5
     global bullet_state
-    global bullet_state2
     bullet_state = 'ready'
     rect.x = 10
     rect.y = display_height / 2 - 200
-
     bullet_speed = 7
-    x = 0
     pygame.mixer.music.play(-1)
     while running:
         win.fill(white)
@@ -409,9 +403,9 @@ def gameloop2(playerimage):
         win.blit(back1, rect2)
         win.blit(playerimage, rect)
         po = []
-        for i in range(9 - 1):
+        for i in range(num_bullet - 1):
             po.append(bulletlist[i].get_rect())
-        for i in range(9 - 1):
+        for i in range(num_bullet - 1):
             win.blit(bulletlist[i], (bulletx[i], bullety[i]))
             bulletx[i] -= bullet_speed
             if bulletx[i] <= 0:
@@ -457,14 +451,13 @@ def gameloop2(playerimage):
 def gameloop(playerimage):  # mainloop
     score = 0
     player_speed = 3
-    cloud_speed = 4
-    global bullet_state
-    global bullet_state2
+    cloud_speed = 6
+    global bullet_state #initialising global num_bullet
     bullet_state = 'ready'
     rect.x = 10
     rect.y = display_height / 2 - 200
     global pause
-    bullet_speed = 4
+    bullet_speed = 6
     x = 0
     pygame.mixer.music.play(-1)
     while True:
@@ -473,10 +466,10 @@ def gameloop(playerimage):  # mainloop
         win.blit(back, rect1)
         win.blit(back1, rect2)
         win.blit(playerimage, rect)
-        po = []
-        for i in range(POL - 1):
-            po.append(bulletlist[i].get_rect())
-        for i in range(POL - 1):
+        list = []
+        for i in range(num_bullet - 1):
+            list.append(bulletlist[i].get_rect())
+        for i in range(num_bullet - 1):
             win.blit(bulletlist[i], (bulletx[i], bullety[i]))
             bulletx[i] -= bullet_speed
             if bulletx[i] <= 0:
@@ -487,7 +480,7 @@ def gameloop(playerimage):  # mainloop
                 pygame.quit()
                 sys.exit()
 
-        keys = pygame.key.get_pressed()
+        keys = pygame.key.get_pressed()# getting all the key  that is pressed
         if keys[pygame.K_DOWN]:
             rect.y += player_speed
         if keys[pygame.K_UP]:
@@ -513,7 +506,7 @@ def gameloop(playerimage):  # mainloop
             cloud_x[i] -= cloud_speed
             if cloud_x[i] < 0 - cloud1[i].get_rect().width:
                 cloud_x[i] = random.randint(1000, 1500)
-        score += 0.01
+        score += 1/100
         scoreimage(int(score))
         for i in range(9 - 1):
             if rect.x > bulletx[i] and rect.x + player.get_rect().width and (
@@ -527,6 +520,6 @@ def gameloop(playerimage):  # mainloop
         pygame.display.update()
 
 
-# called the function gameintro
-clock.tick(200)
-playerinput(player)
+
+clock.tick(200)#setting the fps
+playerinput(player)# called the function playerinput the enter the name
