@@ -89,6 +89,7 @@ def unpaused():
     pause = False
 
 
+# to display the name of the player after he / she crashes
 name = []
 
 
@@ -97,6 +98,8 @@ def fire2(bullet, x, y):
     global bullet_state
     bullet_state = 'fire'
     win.blit(bullet, (x + 16, y + 16))
+
+# to change the bullet_state
 
 
 def test1():
@@ -198,7 +201,7 @@ def crash12(playerimage, score):
             sys.exit()
         pygame.display.update()
 
-
+# created a input box for the player input their name 
 def playerinput(playerimage):
     global active
     color = black
@@ -213,8 +216,8 @@ def playerinput(playerimage):
         text_surface = basic_font.render(user_text, True, white)
         win.blit(text_surface, (rect_x - 1, rect_y + 5))
         a = max(100, text_surface.get_width() + 10)
-        if a >120:
-            rect.x-=0.5
+        if a > 120:
+            rect.x -= 0.5
 
         p = pygame.draw.rect(win, color, (rect_x, rect_y, a, d), 2)
         for events in pygame.event.get():
@@ -227,7 +230,7 @@ def playerinput(playerimage):
                     color = white
                 else:
                     active = False
-                    color = black
+                    color = blue
             if events.type == pygame.KEYDOWN:
                 if active == True:
                     if events.key == pygame.K_BACKSPACE:
