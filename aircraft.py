@@ -42,7 +42,7 @@ game_intro = pygame.image.load('background.png')
 rect2 = back1.get_rect()
 rect2.x = 0
 rect2.y = 0
-# setting color for use
+# creating color for use
 blue = (0, 0, 255)
 red = (255, 0, 0)
 green = (0, 255, 0)
@@ -82,8 +82,7 @@ bullet_x = []
 bullet_state = 'ready'
 bullet_state1 = 'ready'
 
-# created control button for ease of use
-
+#added a unpause function to exit pause fucntion
 
 def unpaused():
     global pause
