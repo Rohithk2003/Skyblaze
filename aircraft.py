@@ -18,6 +18,7 @@ icon1 = pygame.display.set_icon(icon)
 caption = pygame.display.set_caption('Jet shooter')
 player = pygame.image.load('player.png')
 bullet3 = pygame.image.load('bullet1.png')
+#getting the player size
 player_size = player.get_size()
 c, d = player_size
 # converted to images to rect
@@ -201,7 +202,7 @@ def crash12(playerimage, score):
             sys.exit()
         pygame.display.update()
 
-# created a input box for the player input their name 
+# created a input box for the player input their name
 def playerinput(playerimage):
     global active
     color = black
@@ -367,7 +368,6 @@ def escape(playerimage):
 
 
 def gameintro(playerimage):
-    global lvl1
     global user_text
 
     while True:
