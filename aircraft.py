@@ -1,7 +1,7 @@
 # importing all modules
 import random
 import sys
-
+import math
 import pygame
 # to create countdown
 time1 = True
@@ -18,13 +18,13 @@ icon1 = pygame.display.set_icon(icon)
 caption = pygame.display.set_caption('Jet shooter')
 player = pygame.image.load('player.png')
 bullet3 = pygame.image.load('bullet1.png')
-#getting the player size
+# getting the player size
 player_size = player.get_size()
 c, d = player_size
 # converted to images to rect
 pause = False
 basic_font = pygame.font.Font('comic.ttf', 32)
-user_text = ' '
+user_text = ''
 bullet2 = bullet3.get_rect()
 rect = player.get_rect()
 #  loaded background
@@ -82,7 +82,8 @@ bullet_x = []
 bullet_state = 'ready'
 bullet_state1 = 'ready'
 
-#added a unpause function to exit pause fucntion
+# added a unpause function to exit pause fucntion
+
 
 def unpaused():
     global pause
@@ -128,7 +129,9 @@ def message_display1(text, a, b, color):
     textrect.center = (int(a), int(b))
     win.blit(textsurf, textrect)
 
-#added message display function to blit text on to the window 
+# added message display function to blit text on to the window
+
+
 def message_display2(text, a, b, color):
     smalltext = pygame.font.Font('comic.ttf', 30)
     textsurf, textrect = text_object(text, smalltext, color)
@@ -155,13 +158,10 @@ active = False
 # created a crash function to display when crashed
 def crash12(playerimage, score):
     win.blit(crashimage, (0, 0))
-    font = pygame.font.Font('freesansbold.ttf', 20)
-
-    p = ''
+    font = pygame.font.Font('comic.ttf', 20)
     for i in name:
-        p = i
-    print(p)
-    input_name = font.render(p + 'score:' + str(score), True, white)
+        input = i + " score:"
+    input_name = font.render(input + str(score), True, white)
     win.blit(input_name, (10, 10))
     while True:
         for events in pygame.event.get():
@@ -202,6 +202,8 @@ def crash12(playerimage, score):
         pygame.display.update()
 
 # created a input box for the player input their name
+
+
 def playerinput(playerimage):
     global active
     color = black
@@ -238,18 +240,16 @@ def playerinput(playerimage):
                     else:
                         user_text += events.unicode
             keys = pygame.key.get_pressed()
+            text = user_text
+            trying = ''
+            for a in text:
+                if a.isalpha():
+                    trying += a
             if keys[pygame.K_RETURN]:
-                if user_text != ' ':
-                    name.append(user_text)
-                    f = open('hello.txt', 'w')
-                    for i in name:
-                        f.write(i)
-
-                    f.close()
-
-                    gameintro(playerimage)
-                else:
-                    pass
+                name.append(trying)
+                gameintro(playerimage)
+            else:
+                pass
             pygame.display.update()
 
 
@@ -297,8 +297,8 @@ def controls(playerimage):
 
 
 def scoreimage(text):
-    font = pygame.font.Font('Consolas.ttf', 30)
-    img2 = font.render('Time:' + str(text), True, (0, 0, 0))
+    font = pygame.font.Font('comic.ttf', 30)
+    img2 = font.render('Score:' + str(text), True, (0, 0, 0))
     win.blit(img2, (0, 0))
 
 
@@ -367,7 +367,6 @@ def escape(playerimage):
 
 
 def gameintro(playerimage):
-    global user_text
 
     while True:
         win.blit(game_intro, (0, 0))
@@ -452,7 +451,12 @@ def won(playerimage):
     gameloop2(playerimage)
 
 
+def iscollision(playerimage, bulletx, bullety, playerx, playery):
+    collision = math.sqrt(math.pow((playerx-bulletx), 2) + math.pow((playery-bullety), 2))
+    return collision
 # 2nd level loop
+
+
 def gameloop2(playerimage):
     score = 0
     running = True
@@ -577,10 +581,9 @@ def gameloop(playerimage):  # mainloop
         score += 1 / 100
         scoreimage(int(score))
         for i in range(9 - 1):  # collision
-            if rect.x > bulletx[i] and rect.x + player.get_rect().width and (
-                    rect.y < bullety[i] and rect.y + player.get_rect().height > bullety[
-                        i] or not bullety[i] <= rect.y + player.get_rect().height and rect.y + player.get_rect().height >
-                    bullety[i]):
+            testing = iscollision(
+                playerimage, bulletx[i], bullety[i], rect.x, rect.y)
+            if testing < 27:
                 pygame.mixer.music.pause()
                 crash12(playerimage, int(score))
         if score > 50:  # creating a 2nd level

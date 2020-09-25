@@ -1,2 +1,2 @@
 
-bright_red = (200, 0, 0)
+        active = False

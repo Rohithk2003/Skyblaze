@@ -1,1 +1,0 @@
-create table hello select * from emp;
