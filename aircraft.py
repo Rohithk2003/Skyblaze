@@ -3,6 +3,8 @@ import random
 import sys
 import math
 import pygame
+from tkinter import *
+root = Tk()
 # to create countdown
 time1 = True
 # initiating pygame
@@ -90,11 +92,18 @@ def unpaused():
     pause = False
 
 
-# to display the name of the player after he / she crashes
+# to display the name of the player after player crashes
 name = []
 
+f = open('names.txt', 'w')
+if name != []:
+    for i in name:
+        f.write(i)
+        f.write('\n')
 
 # create a function to fire bullet
+
+
 def fire2(bullet, x, y):
     global bullet_state
     bullet_state = 'fire'
@@ -142,7 +151,7 @@ def message_display2(text, a, b, color):
 # to display text
 
 def crash1():
-    message_display1('War Birds', display_height / 2, 300, k)
+    message_display1('Fighter', display_height / 2, 300, k)
 
 
 def someting():
@@ -434,7 +443,7 @@ def gameintro(playerimage):
             quit()
         elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
             pygame.mixer.Sound.play(button)
-            controls(playerimage)
+            root.mainloop()
         pygame.display.update()
 
 
@@ -452,7 +461,8 @@ def won(playerimage):
 
 
 def iscollision(playerimage, bulletx, bullety, playerx, playery):
-    collision = math.sqrt(math.pow((playerx-bulletx), 2) + math.pow((playery-bullety), 2))
+    collision = math.sqrt(math.pow((playerx-bulletx), 2) +
+                          math.pow((playery-bullety), 2))
     return collision
 # 2nd level loop
 
@@ -590,6 +600,10 @@ def gameloop(playerimage):  # mainloop
             won(playerimage)
         pygame.display.update()
 
+f = open('names.txt', 'w')
+for i in name:
+        f.write(i)
+        f.write('\n')
 
 clock.tick(200)  # setting the fps
 playerinput(player)  # called the function playerinput the enter the name
