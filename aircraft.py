@@ -272,10 +272,18 @@ def playerinput(playerimage):
                     trying += a
             if keys[pygame.K_RETURN]:
                 name.append(trying)
+                f = open('names.txt','r')
+                line = f.read()
+                word = line.split()
                 for i in name:
-                    f = open('names.txt', 'a+')
-                    f.write(i)
-                    f.write('\n')
+                    if len(word) >= 5:
+                        f = open('names.txt', 'w')
+                        f.write(i)
+                        f.write('\n')
+                    else:
+                        f = open('names.txt', 'a+')
+                        f.write(i)
+                        f.write('\n')
                 f.close()
                 gameintro(playerimage)
 
