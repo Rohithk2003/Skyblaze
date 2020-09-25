@@ -3,7 +3,7 @@ import random
 import sys
 
 import pygame
-
+# to create countdown
 time1 = True
 # initiating pygame
 pygame.init()
@@ -18,6 +18,7 @@ icon1 = pygame.display.set_icon(icon)
 caption = pygame.display.set_caption('Jet shooter')
 player = pygame.image.load('player.png')
 bullet3 = pygame.image.load('bullet1.png')
+#getting the player size
 player_size = player.get_size()
 c, d = player_size
 # converted to images to rect
@@ -41,7 +42,7 @@ game_intro = pygame.image.load('background.png')
 rect2 = back1.get_rect()
 rect2.x = 0
 rect2.y = 0
-# setting color for use
+# creating color for use
 blue = (0, 0, 255)
 red = (255, 0, 0)
 green = (0, 255, 0)
@@ -81,15 +82,14 @@ bullet_x = []
 bullet_state = 'ready'
 bullet_state1 = 'ready'
 
-
-# created control button for ease of use
-
+#added a unpause function to exit pause fucntion
 
 def unpaused():
     global pause
     pause = False
 
 
+# to display the name of the player after he / she crashes
 name = []
 
 
@@ -98,6 +98,8 @@ def fire2(bullet, x, y):
     global bullet_state
     bullet_state = 'fire'
     win.blit(bullet, (x + 16, y + 16))
+
+# to change the bullet_state
 
 
 def test1():
@@ -126,7 +128,7 @@ def message_display1(text, a, b, color):
     textrect.center = (int(a), int(b))
     win.blit(textsurf, textrect)
 
-
+#added message display function to blit text on to the window 
 def message_display2(text, a, b, color):
     smalltext = pygame.font.Font('comic.ttf', 30)
     textsurf, textrect = text_object(text, smalltext, color)
@@ -199,7 +201,7 @@ def crash12(playerimage, score):
             sys.exit()
         pygame.display.update()
 
-
+# created a input box for the player input their name
 def playerinput(playerimage):
     global active
     color = black
@@ -228,7 +230,7 @@ def playerinput(playerimage):
                     color = white
                 else:
                     active = False
-                    color = black
+                    color = blue
             if events.type == pygame.KEYDOWN:
                 if active == True:
                     if events.key == pygame.K_BACKSPACE:
@@ -365,7 +367,6 @@ def escape(playerimage):
 
 
 def gameintro(playerimage):
-    global lvl1
     global user_text
 
     while True:
@@ -437,8 +438,6 @@ def gameintro(playerimage):
             controls(playerimage)
         pygame.display.update()
 
-
-# added a function which display you have won when the player have time > 20#
 
 def won(playerimage):
     p = pygame.image.load('background.png')
@@ -580,7 +579,7 @@ def gameloop(playerimage):  # mainloop
         for i in range(9 - 1):  # collision
             if rect.x > bulletx[i] and rect.x + player.get_rect().width and (
                     rect.y < bullety[i] and rect.y + player.get_rect().height > bullety[
-                i] or not bullety[i] <= rect.y + player.get_rect().height and rect.y + player.get_rect().height >
+                        i] or not bullety[i] <= rect.y + player.get_rect().height and rect.y + player.get_rect().height >
                     bullety[i]):
                 pygame.mixer.music.pause()
                 crash12(playerimage, int(score))
