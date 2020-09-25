@@ -81,6 +81,7 @@ bullet_x = []
 bullet_state = 'ready'
 bullet_state1 = 'ready'
 
+
 # created control button for ease of use
 
 
@@ -213,8 +214,8 @@ def playerinput(playerimage):
         text_surface = basic_font.render(user_text, True, white)
         win.blit(text_surface, (rect_x - 1, rect_y + 5))
         a = max(100, text_surface.get_width() + 10)
-        if a >120:
-            rect.x-=0.5
+        if a > 120:
+            rect.x -= 0.5
 
         p = pygame.draw.rect(win, color, (rect_x, rect_y, a, d), 2)
         for events in pygame.event.get():
@@ -437,6 +438,8 @@ def gameintro(playerimage):
         pygame.display.update()
 
 
+# added a function which display you have won when the player have time > 20#
+
 def won(playerimage):
     p = pygame.image.load('background.png')
     win.blit(p, (0, 0))
@@ -577,7 +580,7 @@ def gameloop(playerimage):  # mainloop
         for i in range(9 - 1):  # collision
             if rect.x > bulletx[i] and rect.x + player.get_rect().width and (
                     rect.y < bullety[i] and rect.y + player.get_rect().height > bullety[
-                        i] or not bullety[i] <= rect.y + player.get_rect().height and rect.y + player.get_rect().height >
+                i] or not bullety[i] <= rect.y + player.get_rect().height and rect.y + player.get_rect().height >
                     bullety[i]):
                 pygame.mixer.music.pause()
                 crash12(playerimage, int(score))
