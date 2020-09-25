@@ -3,7 +3,7 @@ import random
 import sys
 
 import pygame
-
+# to create countdown
 time1 = True
 # initiating pygame
 pygame.init()
@@ -128,7 +128,7 @@ def message_display1(text, a, b, color):
     textrect.center = (int(a), int(b))
     win.blit(textsurf, textrect)
 
-
+#added message display function to blit text on to the window 
 def message_display2(text, a, b, color):
     smalltext = pygame.font.Font('comic.ttf', 30)
     textsurf, textrect = text_object(text, smalltext, color)
