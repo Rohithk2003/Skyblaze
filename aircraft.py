@@ -1,4 +1,5 @@
 # importing all modules
+import os
 import random
 import sys
 import math
@@ -95,11 +96,6 @@ def unpaused():
 # to display the name of the player after player crashes
 name = []
 
-f = open('names.txt', 'w')
-if name != []:
-    for i in name:
-        f.write(i)
-        f.write('\n')
 
 # create a function to fire bullet
 
@@ -152,13 +148,6 @@ def message_display2(text, a, b, color):
 
 def crash1():
     message_display1('Fighter', display_height / 2, 300, k)
-
-
-def someting():
-    f = open('hello.txt', 'r')
-    line = f.readlines()
-    for i in line:
-        print(i)
 
 
 active = False
@@ -256,9 +245,13 @@ def playerinput(playerimage):
                     trying += a
             if keys[pygame.K_RETURN]:
                 name.append(trying)
+                for i in name:
+                    f = open('names.txt', 'a+')
+                    f.write(i)
+                    f.write('\n')
+                f.close()
                 gameintro(playerimage)
-            else:
-                pass
+
             pygame.display.update()
 
 
@@ -600,10 +593,10 @@ def gameloop(playerimage):  # mainloop
             won(playerimage)
         pygame.display.update()
 
-f = open('names.txt', 'w')
-for i in name:
-        f.write(i)
-        f.write('\n')
-
+f = open('names.txt','r')
+line = f.read()
+word = line.split()
+if len(word) == 5:
+    os.remove('names.txt')
 clock.tick(200)  # setting the fps
 playerinput(player)  # called the function playerinput the enter the name
