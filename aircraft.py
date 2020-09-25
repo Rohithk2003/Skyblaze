@@ -5,7 +5,7 @@ import sys
 import math
 import pygame
 from tkinter import *
-# adding root window in tkinter 
+# adding root window in tkinter
 root = Tk()
 # to create countdown
 time1 = True
@@ -61,6 +61,7 @@ cloud1 = []
 low_black = (26, 25, 27)
 light_black = (43, 43, 45)
 num = 5
+table = pygame.image.load('Capture.PNG')
 button = pygame.mixer.Sound('BUTTON.wav')
 pygame.mixer.music.load('music.mp3')
 crash_sound = pygame.mixer.Sound('crash.wav')
@@ -149,6 +150,31 @@ def message_display2(text, a, b, color):
 
 def crash1():
     message_display1('Fighter', display_height / 2, 300, k)
+
+
+def scoreboard():
+    f = open('names.txt', 'r')
+    line = f.read()
+    word = line.split()
+    font = pygame.font.Font(None, 32)
+    while True:
+        for e in pygame.event.get():
+            if e.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        win.fill(green)
+        win.blit(table, (100, 300))
+        x = [104, 104, 104, 104, 104]
+        y = [319, 338, 357, 357 + 19, 357 + 19 + 19]
+        list = []
+        for i in word:
+            list.append(font.render(i, True, (0, 0, 0)))
+        for i in range(6 - 1):
+            win.blit(list[i], (x[i], y[i]))
+
+        mouse = pygame.mouse.get_pos()
+        print(mouse)
+        pygame.display.update()
 
 
 active = False
@@ -366,6 +392,7 @@ def escape(playerimage):
             sys.exit()
         elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
             pygame.mixer.Sound.play(button)
+            controls(playerimage)
         pygame.display.update()
 
 
@@ -455,8 +482,8 @@ def won(playerimage):
 
 
 def iscollision(playerimage, bulletx, bullety, playerx, playery):
-    collision = math.sqrt(math.pow((playerx-bulletx), 2) +
-                          math.pow((playery-bullety), 2))
+    collision = math.sqrt(math.pow((playerx - bulletx), 2) +
+                          math.pow((playery - bullety), 2))
     return collision
 # 2nd level loop
 
@@ -594,10 +621,6 @@ def gameloop(playerimage):  # mainloop
             won(playerimage)
         pygame.display.update()
 
-f = open('names.txt','r')
-line = f.read()
-word = line.split()
-if len(word) == 5:
-    os.remove('names.txt')
+
 clock.tick(200)  # setting the fps
 playerinput(player)  # called the function playerinput the enter the name
