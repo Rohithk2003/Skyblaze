@@ -5,6 +5,7 @@ import sys
 import math
 import pygame
 from tkinter import *
+# adding root window in tkinter 
 root = Tk()
 # to create countdown
 time1 = True
