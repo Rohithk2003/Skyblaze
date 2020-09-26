@@ -46,7 +46,7 @@ game_intro = pygame.image.load('background.png')
 rect2 = back1.get_rect()
 rect2.x = 0
 rect2.y = 0
-# creating color for use
+# creating color
 blue = (0, 0, 255)
 red = (255, 0, 0)
 green = (0, 255, 0)
@@ -94,6 +94,8 @@ def unpaused():
     global pause
     pause = False
 
+
+active = False
 
 # to display the name of the player after player crashes
 name = []
@@ -154,9 +156,13 @@ def crash1():
 
 def scoreboard():
     f = open('names.txt', 'r')
+    f2 = open('score.txt', 'r')
+    line1 = f2.read()
+    word1 = line1.split()
+    display_height, display_width = 400, 500
     line = f.read()
     word = line.split()
-    font = pygame.font.Font(None, 32)
+    font = pygame.font.Font('comic.ttf', 32)
     while True:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
@@ -166,26 +172,34 @@ def scoreboard():
         win.blit(table, (100, 300))
         x = [104, 104, 104, 104, 104]
         y = [319, 338, 357, 357 + 19, 357 + 19 + 19]
+        x1 = [227, 227+19, 227+19*2, 227+19*3, 227+19*4]
+        y1 = [325, 325+19, 325+19+19, 325+19 + 19 + 19, 325+19 + 19 + 19 + 19]
         list = []
         for i in word:
             list.append(font.render(i, True, (0, 0, 0)))
-        for i in range(6 - 1):
-            win.blit(list[i], (x[i], y[i]))
+        score12 = []
+        for p in word1:
+            score12.append(font.render(p, True, (0, 0, 0)))
+        number = len(word) - 1
+        number1 = len(word1)-1
+        for k in range(number):
+            win.blit(list[k], (x[k], y[k]))
+        for j in range(number1):
+            win.blit(score12[j], (x1[j], y1[j]))
 
         mouse = pygame.mouse.get_pos()
         print(mouse)
         pygame.display.update()
 
-
-active = False
-
-
 # created a crash function to display when crashed
+
+
 def crash12(playerimage, score):
     win.blit(crashimage, (0, 0))
     font = pygame.font.Font('comic.ttf', 20)
     for i in name:
         input = i + " score:"
+
     input_name = font.render(input + str(score), True, white)
     win.blit(input_name, (10, 10))
     while True:
@@ -218,6 +232,15 @@ def crash12(playerimage, score):
         click = pygame.mouse.get_pressed()
         if click[0] == 1 and 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450:
             pygame.mixer.Sound.play(button)
+
+            bulletx = []
+            bullety = []
+            num_bullet = 9
+            for i in range(num_bullet - 1):
+                a = random.randint(1000, 1500)
+                b = random.randint(0, 650)
+                bulletx.append(a)
+                bullety.append(b)
             pygame.mixer.music.unpause()
             gameloop(playerimage)
         elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
@@ -231,7 +254,7 @@ def crash12(playerimage, score):
 
 def playerinput(playerimage):
     global active
-    color = black
+    color = white
     global user_text
     while True:
         win.fill(low_black)
@@ -254,10 +277,10 @@ def playerinput(playerimage):
             if events.type == pygame.MOUSEBUTTONDOWN:
                 if p.collidepoint(events.pos):
                     active = True
-                    color = white
+                    color = green
                 else:
                     active = False
-                    color = blue
+                    color = white
             if events.type == pygame.KEYDOWN:
                 if active == True:
                     if events.key == pygame.K_BACKSPACE:
@@ -272,7 +295,7 @@ def playerinput(playerimage):
                     trying += a
             if keys[pygame.K_RETURN]:
                 name.append(trying)
-                f = open('names.txt','r')
+                f = open('names.txt', 'r')
                 line = f.read()
                 word = line.split()
                 for i in name:
@@ -331,6 +354,8 @@ def controls(playerimage):
             pygame.quit()
             sys.exit()
         pygame.display.update()
+
+# score function
 
 
 def scoreimage(text):
@@ -400,7 +425,7 @@ def escape(playerimage):
             sys.exit()
         elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
             pygame.mixer.Sound.play(button)
-            controls(playerimage)
+            scoreboard()
         pygame.display.update()
 
 
@@ -570,6 +595,14 @@ def gameloop(playerimage):  # mainloop
     global pause
     bullet_speed = 6
     x = 0
+    bulletx = []
+    bullety = []
+    num_bullet = 9
+    for i in range(num_bullet - 1):
+        a = random.randint(1000, 1500)
+        b = random.randint(0, 650)
+        bulletx.append(a)
+        bullety.append(b)
     pygame.mixer.music.play(-1)
     while True:
         win.fill(white)  # filling background with white
@@ -586,6 +619,8 @@ def gameloop(playerimage):  # mainloop
             if bulletx[i] <= 0:
                 bulletx[i] = random.randint(1000, 1500)
                 bullety[i] = random.randint(0 + i, 700)
+
+        score += 1/100
         for events in pygame.event.get():
             if events.type == pygame.QUIT:
                 pygame.quit()
@@ -617,12 +652,27 @@ def gameloop(playerimage):  # mainloop
             cloud_x[i] -= cloud_speed
             if cloud_x[i] < 0 - cloud1[i].get_rect().width:
                 cloud_x[i] = random.randint(1000, 1500)
-        score += 1 / 100
+        scorelist = []
         scoreimage(int(score))
         for i in range(9 - 1):  # collision
             testing = iscollision(
                 playerimage, bulletx[i], bullety[i], rect.x, rect.y)
             if testing < 27:
+                scorelist.append(str(int(score)))
+                f2 = open('score.txt', 'r')
+                line2 = f2.read()
+                word2 = line2.split()
+                for t in scorelist:
+                    if len(word2) > 5:
+                        f2 = open('score.txt', 'w')
+                        f2.write(t)
+                        f2.write('\n')
+
+                    else:
+                        f2 = open('score.txt', 'a')
+                        f2.write(t)
+                        f2.write('\n')
+                    f2.close()
                 pygame.mixer.music.pause()
                 crash12(playerimage, int(score))
         if score > 50:  # creating a 2nd level
@@ -632,3 +682,4 @@ def gameloop(playerimage):  # mainloop
 
 clock.tick(200)  # setting the fps
 playerinput(player)  # called the function playerinput the enter the name
+227, 325
