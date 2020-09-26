@@ -5,32 +5,40 @@ import sys
 import math
 import pygame
 from tkinter import *
+
 # adding root window in tkinter
 root = Tk()
+
 # to create countdown
 time1 = True
+
 # initiating pygame
 pygame.init()
 clock = pygame.time.Clock()
 display_height = 1000
 display_width = 700
+
 # creating a window
 win = pygame.display.set_mode((display_height, display_width))
+
 # loading player image
 icon = pygame.image.load('player.png')
 icon1 = pygame.display.set_icon(icon)
 caption = pygame.display.set_caption('Jet shooter')
 player = pygame.image.load('player.png')
 bullet3 = pygame.image.load('bullet1.png')
+
 # getting the player size
 player_size = player.get_size()
 c, d = player_size
+
 # converted to images to rect
 pause = False
 basic_font = pygame.font.Font('comic.ttf', 32)
 user_text = ''
 bullet2 = bullet3.get_rect()
 rect = player.get_rect()
+
 #  loaded background
 back = pygame.image.load('back.png')
 back1 = pygame.image.load('back.png')
@@ -40,12 +48,15 @@ w, h = back_size
 rect1 = back.get_rect()
 rect1.x = w
 rect1.y = 0
+
 # loaded intro background
 user_text1 = ' '
 game_intro = pygame.image.load('background.png')
 rect2 = back1.get_rect()
 rect2.x = 0
 rect2.y = 0
+
+
 # creating color
 blue = (0, 0, 255)
 red = (255, 0, 0)
@@ -60,6 +71,8 @@ bright_blue = (0, 0, 200)
 cloud1 = []
 low_black = (26, 25, 27)
 light_black = (43, 43, 45)
+
+
 num = 5
 table = pygame.image.load('Capture.PNG')
 button = pygame.mixer.Sound('BUTTON.wav')
@@ -71,8 +84,9 @@ cloud_y = [534, 124, 321, 546, 123, 491]
 
 for i in range(num - 1):
     cloud1.append(pygame.image.load('cloud.png'))
-# creating bullet list
 
+
+# creating bullet list
 bulletlist = []
 bulletx = []
 bullety = []
@@ -87,6 +101,7 @@ bullet_x = []
 bullet_state = 'ready'
 bullet_state1 = 'ready'
 
+
 # added a unpause function to exit pause fucntion
 
 
@@ -96,6 +111,7 @@ def unpaused():
 
 
 active = False
+
 
 # to display the name of the player after player crashes
 name = []
@@ -150,8 +166,13 @@ def message_display2(text, a, b, color):
 
 # to display text
 
+
 def crash1():
     message_display1('Fighter', display_height / 2, 300, k)
+
+
+104, 323
+104, 363
 
 
 def scoreboard():
@@ -159,7 +180,6 @@ def scoreboard():
     f2 = open('score.txt', 'r')
     line1 = f2.read()
     word1 = line1.split()
-    display_height, display_width = 400, 500
     line = f.read()
     word = line.split()
     font = pygame.font.Font('comic.ttf', 32)
@@ -170,22 +190,126 @@ def scoreboard():
                 quit()
         win.fill(green)
         win.blit(table, (100, 300))
-        x = [104, 104, 104, 104, 104]
-        y = [319, 338, 357, 357 + 19, 357 + 19 + 19]
-        x1 = [227, 227+19, 227+19*2, 227+19*3, 227+19*4]
-        y1 = [325, 325+19, 325+19+19, 325+19 + 19 + 19, 325+19 + 19 + 19 + 19]
+        x = [473, 473, 473, 473, 473]
+        y = [325,  323+40, 323+40+40, 323+40+40+40, 323+40+40+40+40]
+
+        x1 = [104, 104, 104, 104, 104]
+        y1 = [303, 350, 350+40, 350+40+40, 350+40+40+40]
+        xnew = []
+        ynew = []
+        xnew1 = []
+        ynew1 = []
         list = []
         for i in word:
             list.append(font.render(i, True, (0, 0, 0)))
         score12 = []
         for p in word1:
             score12.append(font.render(p, True, (0, 0, 0)))
-        number = len(word) - 1
-        number1 = len(word1)-1
-        for k in range(number):
-            win.blit(list[k], (x[k], y[k]))
-        for j in range(number1):
-            win.blit(score12[j], (x1[j], y1[j]))
+
+
+        if len(word) == 1:
+            xnew.append(x[0])
+            ynew.append(y[0])
+            xnew1.append(x1[0])
+            ynew1.append(y1[0])
+            win.blit(score12[0], (xnew[0], ynew[0]))
+            win.blit(list[0], (xnew1[0], ynew1[0]))
+
+        if len(word) == 2:
+            xnew.clear()
+            ynew.clear()
+            xnew.append(x[0])
+            xnew.append(x[1])
+            ynew.append(y[0])
+            ynew.append(y[1])
+            xnew1.append(x1[0])
+            ynew1.append(y1[0])
+            xnew1.append(x1[1])
+            ynew1.append(y1[1])
+            win.blit(score12[0], (xnew[0], ynew[0]))
+            win.blit(score12[0], (xnew[0], ynew[0]))
+            win.blit(list[0], (xnew1[0], ynew1[0]))
+            win.blit(list[1], (xnew1[1], ynew1[1]))
+        if len(word) == 3:
+            xnew.clear()
+            ynew.clear()
+            xnew.append(x[0])
+            xnew.append(x[1])
+            xnew.append(x[2])
+            ynew.append(y[0])
+            ynew.append(y[1])
+            ynew.append(y[2])
+            xnew1.append(x1[0])
+            ynew1.append(y1[0])
+            xnew1.append(x1[1])
+            ynew1.append(y1[1])
+            xnew1.append(x1[2])
+            ynew1.append(y1[2])
+            win.blit(score12[0], (xnew[0], ynew[0]))
+            win.blit(score12[1], (xnew[1], ynew[2]))
+            win.blit(score12[2], (xnew[2], ynew[2]))
+            win.blit(list[0], (xnew1[0], ynew1[0]))
+            win.blit(list[1], (xnew1[1], ynew1[1]))
+        if len(word) == 4:
+            xnew.clear()
+            ynew.clear()
+            xnew.append(x[0])
+            xnew.append(x[1])
+            xnew.append(x[2])
+            xnew.append(x[3])
+            ynew.append(y[0])
+            ynew.append(y[1])
+            ynew.append(y[2])
+            ynew.append(y[3])
+            xnew1.append(x1[0])
+            ynew1.append(y1[0])
+            xnew1.append(x1[1])
+            ynew1.append(y1[1])
+            xnew1.append(x1[2])
+            ynew1.append(y1[2])
+            xnew1.append(x1[3])
+            ynew1.append(y1[3])
+            win.blit(score12[0], (xnew[0], ynew[0]))
+            win.blit(score12[1], (xnew[1], ynew[2]))
+            win.blit(score12[2], (xnew[2], ynew[2]))
+            win.blit(score12[3], (xnew[3], ynew[3]))
+            win.blit(list[0], (xnew1[0], ynew1[0]))
+            win.blit(list[1], (xnew1[1], ynew1[1]))
+            win.blit(list[2], (xnew1[2], ynew1[2]))
+            win.blit(list[3], (xnew1[3], ynew1[3]))
+        if len(word) == 5:
+            xnew.clear()
+            ynew.clear()
+            xnew.append(x[0])
+            xnew.append(x[1])
+            xnew.append(x[2])
+            xnew.append(x[3])
+            xnew.append(x[4])
+            ynew.append(y[0])
+            ynew.append(y[1])
+            ynew.append(y[2])
+            ynew.append(y[3])
+            ynew.append(y[4])
+            xnew1.append(x1[0])
+            ynew1.append(y1[0])
+            xnew1.append(x1[1])
+            ynew1.append(y1[1])
+            xnew1.append(x1[2])
+            ynew1.append(y1[2])
+            xnew1.append(x1[3])
+            ynew1.append(y1[3])
+            xnew1.append(x1[4])
+            ynew1.append(y1[4])
+            win.blit(score12[0], (xnew[0], ynew[0]))
+            win.blit(score12[1], (xnew[1], ynew[2]))
+            win.blit(score12[2], (xnew[2], ynew[2]))
+            win.blit(score12[3], (xnew[3], ynew[3]))
+            win.blit(score12[4], (xnew[4], ynew[4]))
+            win.blit(list[0], (xnew1[0], ynew1[0]))
+            win.blit(list[1], (xnew1[1], ynew1[1]))
+            win.blit(list[2], (xnew1[2], ynew1[2]))
+            win.blit(list[3], (xnew1[3], ynew1[3]))
+            win.blit(list[4], (xnew1[4], ynew1[4]))
 
         mouse = pygame.mouse.get_pos()
         print(mouse)
