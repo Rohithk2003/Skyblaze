@@ -43,6 +43,7 @@ rect = player.get_rect()
 back = pygame.image.load('back.png')
 back1 = pygame.image.load('back.png')
 crashimage = pygame.image.load('gameover.png')
+input_back = pygame.image.load('input_back.png')
 back_size = back.get_size()
 w, h = back_size
 rect1 = back.get_rect()
@@ -171,8 +172,7 @@ def crash1():
     message_display1('Fighter', display_height / 2, 300, k)
 
 
-104, 323
-104, 363
+
 
 
 def scoreboard():
@@ -190,8 +190,10 @@ def scoreboard():
                 quit()
         win.fill(green)
         win.blit(table, (100, 300))
-        x = [473, 473, 473, 473, 473]
-        y = [325,  323+40, 323+40+40, 323+40+40+40, 323+40+40+40+40]
+        message_display2('Player_name',185 ,273 , black)
+        message_display2('Score', 510, 273, black)
+        x = [473, 473, 473, 473, 473,473]
+        y = [310,  310+40, 310+40+40, 310+40+40+30, 310+40+40+30+25,310+40+40+30+25+40]
 
         x1 = [104, 104, 104, 104, 104]
         y1 = [303, 350, 350+40, 350+40+40, 350+40+40+40]
@@ -227,7 +229,7 @@ def scoreboard():
             xnew1.append(x1[1])
             ynew1.append(y1[1])
             win.blit(score12[0], (xnew[0], ynew[0]))
-            win.blit(score12[0], (xnew[0], ynew[0]))
+            win.blit(score12[0], (xnew[1], ynew[1]))
             win.blit(list[0], (xnew1[0], ynew1[0]))
             win.blit(list[1], (xnew1[1], ynew1[1]))
         if len(word) == 3:
@@ -246,10 +248,11 @@ def scoreboard():
             xnew1.append(x1[2])
             ynew1.append(y1[2])
             win.blit(score12[0], (xnew[0], ynew[0]))
-            win.blit(score12[1], (xnew[1], ynew[2]))
+            win.blit(score12[1], (xnew[1], ynew[1]))
             win.blit(score12[2], (xnew[2], ynew[2]))
             win.blit(list[0], (xnew1[0], ynew1[0]))
             win.blit(list[1], (xnew1[1], ynew1[1]))
+            win.blit(list[2], (xnew1[2], ynew1[2]))
         if len(word) == 4:
             xnew.clear()
             ynew.clear()
@@ -270,7 +273,7 @@ def scoreboard():
             xnew1.append(x1[3])
             ynew1.append(y1[3])
             win.blit(score12[0], (xnew[0], ynew[0]))
-            win.blit(score12[1], (xnew[1], ynew[2]))
+            win.blit(score12[1], (xnew[1], ynew[1]))
             win.blit(score12[2], (xnew[2], ynew[2]))
             win.blit(score12[3], (xnew[3], ynew[3]))
             win.blit(list[0], (xnew1[0], ynew1[0]))
@@ -301,7 +304,7 @@ def scoreboard():
             xnew1.append(x1[4])
             ynew1.append(y1[4])
             win.blit(score12[0], (xnew[0], ynew[0]))
-            win.blit(score12[1], (xnew[1], ynew[2]))
+            win.blit(score12[1], (xnew[1], ynew[1]))
             win.blit(score12[2], (xnew[2], ynew[2]))
             win.blit(score12[3], (xnew[3], ynew[3]))
             win.blit(score12[4], (xnew[4], ynew[4]))
@@ -378,16 +381,16 @@ def crash12(playerimage, score):
 
 def playerinput(playerimage):
     global active
-    color = white
+    color = black
     global user_text
     while True:
-        win.fill(low_black)
-        message_display2('Please Enter Your name:', 500, 200, white)
+        win.blit(input_back,(0,0))
+        message_display2('Please Enter Your name:', 500, 200, low_black)
         a = 100
         d = 50
         rect_x = 450
         rect_y = 300
-        text_surface = basic_font.render(user_text, True, white)
+        text_surface = basic_font.render(user_text, True, black)
         win.blit(text_surface, (rect_x - 1, rect_y + 5))
         a = max(100, text_surface.get_width() + 10)
         if a > 120:
@@ -404,7 +407,7 @@ def playerinput(playerimage):
                     color = green
                 else:
                     active = False
-                    color = white
+                    color = black
             if events.type == pygame.KEYDOWN:
                 if active == True:
                     if events.key == pygame.K_BACKSPACE:
@@ -478,10 +481,7 @@ def controls(playerimage):
             pygame.quit()
             sys.exit()
         pygame.display.update()
-
 # score function
-
-
 def scoreimage(text):
     font = pygame.font.Font('comic.ttf', 30)
     img2 = font.render('Score:' + str(text), True, (0, 0, 0))
@@ -642,7 +642,6 @@ def iscollision(playerimage, bulletx, bullety, playerx, playery):
     collision = math.sqrt(math.pow((playerx - bulletx), 2) +
                           math.pow((playery - bullety), 2))
     return collision
-# 2nd level loop
 
 
 def gameloop2(playerimage):
@@ -705,8 +704,7 @@ def gameloop2(playerimage):
                 if rect.y < bullety[i] and rect.y + player.get_rect().height > bullety[i]:
                     pygame.mixer.music.pause()
                     crash12(playerimage, int(score))
-        pygame.display.update()
-
+        pygame.display.update()# 2nd level loop
 
 def gameloop(playerimage):  # mainloop
     score = 0  # score
@@ -806,4 +804,3 @@ def gameloop(playerimage):  # mainloop
 
 clock.tick(200)  # setting the fps
 playerinput(player)  # called the function playerinput the enter the name
-227, 325
