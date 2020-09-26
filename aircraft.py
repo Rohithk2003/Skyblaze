@@ -7,6 +7,7 @@ import sys
 import pygame
 
 
+
 # to create countdown
 time1 = True
 
@@ -735,7 +736,7 @@ def gameloop(playerimage):  # mainloop
             win.blit(bulletlist[i], (bulletx[i], bullety[i]))
             bulletx[i] -= bullet_speed
             if bulletx[i] <= 0:
-                bulletx[i] = random.randint(1000, 1500)
+                bulletx[i] = random.randint(1000, 1500)#after the bullet moving out of the windows and then bltting it again at a diff pos
                 bullety[i] = random.randint(0 + i, 700)
 
         score += 1 / 100
