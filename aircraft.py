@@ -3,12 +3,9 @@ import math
 import os
 import random
 import sys
-from tkinter import *
 
 import pygame
 
-# adding root window in tkinter
-root = Tk()
 
 # to create countdown
 time1 = True
