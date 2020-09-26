@@ -1,10 +1,11 @@
 # importing all modules
+import math
 import os
 import random
 import sys
-import math
-import pygame
 from tkinter import *
+
+import pygame
 
 # adding root window in tkinter
 root = Tk()
@@ -57,7 +58,6 @@ rect2 = back1.get_rect()
 rect2.x = 0
 rect2.y = 0
 
-
 # creating color
 blue = (0, 0, 255)
 red = (255, 0, 0)
@@ -73,7 +73,6 @@ cloud1 = []
 low_black = (26, 25, 27)
 light_black = (43, 43, 45)
 
-
 num = 5
 table = pygame.image.load('Capture.PNG')
 button = pygame.mixer.Sound('BUTTON.wav')
@@ -85,7 +84,6 @@ cloud_y = [534, 124, 321, 546, 123, 491]
 
 for i in range(num - 1):
     cloud1.append(pygame.image.load('cloud.png'))
-
 
 # creating bullet list
 bulletlist = []
@@ -113,7 +111,6 @@ def unpaused():
 
 active = False
 
-
 # to display the name of the player after player crashes
 name = []
 
@@ -125,6 +122,7 @@ def fire2(bullet, x, y):
     global bullet_state
     bullet_state = 'fire'
     win.blit(bullet, (x + 16, y + 16))
+
 
 # to change the bullet_state
 
@@ -155,6 +153,7 @@ def message_display1(text, a, b, color):
     textrect.center = (int(a), int(b))
     win.blit(textsurf, textrect)
 
+
 # added message display function to blit text on to the window
 
 
@@ -172,9 +171,6 @@ def crash1():
     message_display1('Fighter', display_height / 2, 300, k)
 
 
-
-
-
 def scoreboard():
     f = open('names.txt', 'r')
     f2 = open('score.txt', 'r')
@@ -190,13 +186,13 @@ def scoreboard():
                 quit()
         win.fill(green)
         win.blit(table, (100, 300))
-        message_display2('Player_name',185 ,273 , black)
+        message_display2('Player_name', 185, 273, black)
         message_display2('Score', 510, 273, black)
-        x = [473, 473, 473, 473, 473,473]
-        y = [310,  310+40, 310+40+40, 310+40+40+30, 310+40+40+30+25,310+40+40+30+25+40]
+        x = [473, 473, 473, 473, 473, 473]
+        y = [310, 310 + 40, 310 + 40 + 40, 310 + 40 + 40 + 30, 310 + 40 + 40 + 30 + 25, 310 + 40 + 40 + 30 + 25 + 40]
 
         x1 = [104, 104, 104, 104, 104]
-        y1 = [303, 350, 350+40, 350+40+40, 350+40+40+40]
+        y1 = [303, 350, 350 + 40, 350 + 40 + 40, 350 + 40 + 40 + 40]
         xnew = []
         ynew = []
         xnew1 = []
@@ -207,7 +203,6 @@ def scoreboard():
         score12 = []
         for p in word1:
             score12.append(font.render(p, True, (0, 0, 0)))
-
 
         if len(word) == 1:
             xnew.append(x[0])
@@ -318,6 +313,7 @@ def scoreboard():
         print(mouse)
         pygame.display.update()
 
+
 # created a crash function to display when crashed
 
 
@@ -376,6 +372,7 @@ def crash12(playerimage, score):
             sys.exit()
         pygame.display.update()
 
+
 # created a input box for the player input their name
 
 
@@ -384,7 +381,7 @@ def playerinput(playerimage):
     color = black
     global user_text
     while True:
-        win.blit(input_back,(0,0))
+        win.blit(input_back, (0, 0))
         message_display2('Please Enter Your name:', 500, 200, low_black)
         a = 100
         d = 50
@@ -481,6 +478,8 @@ def controls(playerimage):
             pygame.quit()
             sys.exit()
         pygame.display.update()
+
+
 # score function
 def scoreimage(text):
     font = pygame.font.Font('comic.ttf', 30)
@@ -554,7 +553,6 @@ def escape(playerimage):
 
 
 def gameintro(playerimage):
-
     while True:
         win.blit(game_intro, (0, 0))
 
@@ -704,7 +702,8 @@ def gameloop2(playerimage):
                 if rect.y < bullety[i] and rect.y + player.get_rect().height > bullety[i]:
                     pygame.mixer.music.pause()
                     crash12(playerimage, int(score))
-        pygame.display.update()# 2nd level loop
+        pygame.display.update()  # 2nd level loop
+
 
 def gameloop(playerimage):  # mainloop
     score = 0  # score
@@ -742,7 +741,7 @@ def gameloop(playerimage):  # mainloop
                 bulletx[i] = random.randint(1000, 1500)
                 bullety[i] = random.randint(0 + i, 700)
 
-        score += 1/100
+        score += 1 / 100
         for events in pygame.event.get():
             if events.type == pygame.QUIT:
                 pygame.quit()
