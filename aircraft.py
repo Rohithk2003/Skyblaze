@@ -5,7 +5,7 @@ import pickle
 import random
 import sys
 import pygame
-
+import time
 # to create countdown
 time1 = True
 
@@ -523,7 +523,11 @@ def escape(playerimage):
             controls(playerimage)
         pygame.display.update()
 
-
+def countdown_background(playerimage,cloudimage,bulletimage,cloudx,cloudy,bulletx,bullety,playerectx,playerrecty):
+    win.blit(back.png)
+    win.blit(playerimage,(playerectx,playerrecty))
+    win.blit(cloudimage,(cloudx,cloudy))
+    win.blit(bulletimage,(bulletx,bullety))
 def gameintro(playerimage):
     while True:
         win.blit(game_intro, (0, 0))
@@ -634,6 +638,9 @@ def countdown(playerimage):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
+        time.sleep(10)
+        gameloop(playerimage)
+        time.sleep(0.1)
         testing1()
         untesting()
         pygame.display.update()
@@ -650,7 +657,6 @@ def countdown(playerimage):
         message_display('GO!!', display_height / 2, 300, black)
         clock.tick(1)
         pygame.display.update()
-        gameloop(playerimage)
 
 def gameloop2(playerimage):
     score = 0  # score
@@ -829,7 +835,7 @@ def gameloop(playerimage):  # mainloop
                 sys.exit()
             if events.type == pygame.KEYDOWN:
                 if events.key == pygame.K_SPACE:
-                    if bullet_state is 'ready':
+                    if bullet_state == 'ready':
                         square.x = rect.x
                         square.y = rect.y
                         fire(player_bullet, square.x, square.y)
