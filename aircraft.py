@@ -44,7 +44,7 @@ user_text = ''
 bullet2 = bullet3.get_rect()
 rect = player.get_rect()
 
-basic_font = pygame.font.Font('comic.ttf', 32)
+basic_font = pygame.font.Font('font.ttf', 32)
 back_size = back.get_size()
 w, h = back_size
 rect1 = back.get_rect()
@@ -156,7 +156,7 @@ def message_display1(text, a, b, color):
 
 
 def message_display2(text, a, b, color):
-    smalltext = pygame.font.Font('comic.ttf', 30)
+    smalltext = pygame.font.Font('font.ttf', 30)
     textsurf, textrect = text_object(text, smalltext, color)
     textrect.center = (int(a), int(b))
     win.blit(textsurf, textrect)
@@ -177,7 +177,7 @@ def scoreboard():
     line = f.read()
     word = line.split()
 
-    font = pygame.font.Font('comic.ttf', 40)
+    font = pygame.font.Font('font.ttf', 40)
     while True:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
@@ -267,7 +267,7 @@ def scoreboard():
 def crash12(playerimage, score):
     win.fill(white)
     message_display('Game over', 500, 350, black)
-    font = pygame.font.Font('comic.ttf', 20)
+    font = pygame.font.Font('font.ttf', 20)
     for i in name:
         input = i + " score:"
 
@@ -281,18 +281,18 @@ def crash12(playerimage, score):
         mouse = pygame.mouse.get_pos()
         if 430 < mouse[0] < 430 + 150 and 450 < mouse[1] < 50 + 450:
             pygame.draw.rect(win, low_black, (420, 430, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 570, 150, 50))
+            pygame.draw.rect(win, white, (420, 570, 150, 50),2)
             message_display2('Scoreboard', (420 + 420 + 150) /
                              2, (570 + 570 + 50) / 2, green)
             message_display2('Play Again', (420 + 420 + 150) /
                              2, (430 + 430 + 50) / 2, green)
-            pygame.draw.rect(win, light_black, (420, 500, 150, 50))
+            pygame.draw.rect(win, white, (420, 500, 150, 50),2)
             message_display2('Quit', (420 + 420 + 150) / 2,
                              (500 + 500 + 50) / 2, green)
         elif 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
-            pygame.draw.rect(win, light_black, (420, 430, 150, 50))
+            pygame.draw.rect(win, white, (420, 430, 150, 50),2)
             pygame.draw.rect(win, low_black, (420, 500, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 570, 150, 50))
+            pygame.draw.rect(win, white, (420, 570, 150, 50),2)
             message_display2('Scoreboard', (420 + 420 + 150) /
                              2, (570 + 570 + 50) / 2, green)
             message_display2('Quit', (420 + 420 + 150) / 2,
@@ -300,8 +300,8 @@ def crash12(playerimage, score):
             message_display2('Play Again', (420 + 420 + 150) /
                              2, (430 + 430 + 50) / 2, green)
         elif 420 < mouse[0] < 420 + 150 and 570 < mouse[1] < 570 + 50:
-            pygame.draw.rect(win, light_black, (420, 430, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 500, 150, 50))
+            pygame.draw.rect(win, white, (420, 430, 150, 50),2)
+            pygame.draw.rect(win, white, (420, 500, 150, 50),2)
             pygame.draw.rect(win, low_black, (420, 570, 150, 50))
             message_display2('Scoreboard', (420 + 420 + 150) /
                              2, (570 + 570 + 50) / 2, green)
@@ -310,9 +310,9 @@ def crash12(playerimage, score):
             message_display2('Play Again', (420 + 420 + 150) /
                              2, (430 + 430 + 50) / 2, green)
         else:
-            pygame.draw.rect(win, light_black, (420, 430, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 500, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 570, 150, 50))
+            pygame.draw.rect(win, white, (420, 430, 150, 50),2)
+            pygame.draw.rect(win, white, (420, 500, 150, 50),2)
+            pygame.draw.rect(win, white, (420, 570, 150, 50),2)
             message_display2('Scoreboard', (420 + 420 + 150) /
                              2, (570 + 570 + 50) / 2, green)
             message_display2('Play Again', (420 + 420 + 150) /
@@ -420,19 +420,19 @@ def controls(playerimage):
             pygame.draw.rect(win, low_black, (420, 450, 150, 50))
             message_display2('Play ', (420 + 420 + 150) /
                              2, (450 + 450 + 50) / 2, black)
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            pygame.draw.rect(win, black, (420, 520, 150, 50),2)
             message_display2('Quit', (420 + 420 + 150) / 2,
                              (520 + 520 + 50) / 2, black)
         elif 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
-            pygame.draw.rect(win, light_black, (420, 450, 150, 50))
-            pygame.draw.rect(win, low_black, (420, 520, 150, 50))
+            pygame.draw.rect(win, black, (420, 450, 150, 50),2)
+            pygame.draw.rect(win, low_black, (420, 520, 150, 50),2)
             message_display2('Quit', (420 + 420 + 150) / 2,
                              (520 + 520 + 50) / 2, black)
             message_display2('Play ', (420 + 420 + 150) /
                              2, (450 + 450 + 50) / 2, black)
         else:
-            pygame.draw.rect(win, light_black, (420, 450, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            pygame.draw.rect(win, black, (420, 450, 150, 50),2)
+            pygame.draw.rect(win, black, (420, 520, 150, 50),2)
             message_display2('Play ', (420 + 420 + 150) /
                              2, (450 + 450 + 50) / 2, black)
             message_display2('Quit', (420 + 420 + 150) / 2,
@@ -454,7 +454,7 @@ def controls(playerimage):
 
 
 def scoreimage(text):
-    font = pygame.font.Font('comic.ttf', 30)
+    font = pygame.font.Font('font.ttf', 30)
     img2 = font.render('Score:' + str(text), True, (0, 0, 0))
     win.blit(img2, (0, 0))
 
@@ -470,9 +470,9 @@ def escape(playerimage):
         keys = pygame.key.get_pressed()
         mouse = pygame.mouse.get_pos()
         if 420 < mouse[0] < 420 + 150 and 460 < mouse[1] < 50 + 460:
-            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
+            pygame.draw.rect(win, black, (420, 580, 150, 50),2)
             pygame.draw.rect(win, low_black, (420, 460, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            pygame.draw.rect(win, black, (420, 520, 150, 50),2)
             message_display2('Continue', (420 + 420 + 150) /
                              2, (460 + 460 + 50) / 2, black)
             message_display2('Quit', (420 + 420 + 150) / 2,
@@ -480,8 +480,8 @@ def escape(playerimage):
             message_display2('Controls', (420 + 420 + 150) /
                              2, (580 + 580 + 50) / 2, black)
         elif 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
-            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
+            pygame.draw.rect(win, black, (420, 580, 150, 50),2)
+            pygame.draw.rect(win, black, (420, 460, 150, 50),2)
             pygame.draw.rect(win, low_black, (420, 520, 150, 50))
             message_display2('Controls', (420 + 420 + 150) /
                              2, (580 + 580 + 50) / 2, black)
@@ -491,8 +491,8 @@ def escape(playerimage):
                              2, (460 + 460 + 50) / 2, black)
         elif 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
             pygame.draw.rect(win, low_black, (420, 580, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            pygame.draw.rect(win, black, (420, 460, 150, 50),2)
+            pygame.draw.rect(win, black, (420, 520, 150, 50),2)
             message_display2('Controls', (420 + 420 + 150) /
                              2, (580 + 580 + 50) / 2, black)
             message_display2('Continue', (420 + 420 + 150) /
@@ -500,9 +500,9 @@ def escape(playerimage):
             message_display2('Quit', (420 + 420 + 150) / 2,
                              (520 + 520 + 50) / 2, black)
         else:
-            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            pygame.draw.rect(win, black, (420, 580, 150, 50),2)
+            pygame.draw.rect(win, black, (420, 460, 150, 50),2)
+            pygame.draw.rect(win, black, (420, 520, 150, 50),2)
             message_display2('Controls', (420 + 420 + 150) /
                              2, (580 + 580 + 50) / 2, black)
             message_display2('Continue', (420 + 420 + 150) /
@@ -546,9 +546,9 @@ def gameintro(playerimage):
             '                          Press q to Quit', 520, 678, k)
 
         if 420 < mouse[0] < 420 + 150 and 460 < mouse[1] < 50 + 460:
-            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
+            pygame.draw.rect(win, white, (420, 580, 150, 50),2)
             pygame.draw.rect(win, low_black, (420, 460, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            pygame.draw.rect(win, white, (420, 520, 150, 50),2)
             message_display2('Start', (420 + 420 + 150) /
                              2, (460 + 460 + 50) / 2, black)
             message_display2('Quit', (420 + 420 + 150) / 2,
@@ -556,8 +556,8 @@ def gameintro(playerimage):
             message_display2('Controls', (420 + 420 + 150) /
                              2, (580 + 580 + 50) / 2, black)
         elif 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
-            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
+            pygame.draw.rect(win, white, (420, 580, 150, 50),2)
+            pygame.draw.rect(win, white, (420, 460, 150, 50),2)
             pygame.draw.rect(win, low_black, (420, 520, 150, 50))
             message_display2('Controls', (420 + 420 + 150) /
                              2, (580 + 580 + 50) / 2, black)
@@ -567,8 +567,8 @@ def gameintro(playerimage):
                              2, (460 + 460 + 50) / 2, black)
         elif 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
             pygame.draw.rect(win, low_black, (420, 580, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            pygame.draw.rect(win, white, (420, 460, 150, 50),2)
+            pygame.draw.rect(win, white, (420, 520, 150, 50),2)
             message_display2('Controls', (420 + 420 + 150) /
                              2, (580 + 580 + 50) / 2, black)
             message_display2('Start', (420 + 420 + 150) /
@@ -576,9 +576,9 @@ def gameintro(playerimage):
             message_display2('Quit', (420 + 420 + 150) / 2,
                              (520 + 520 + 50) / 2, black)
         else:
-            pygame.draw.rect(win, light_black, (420, 580, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 460, 150, 50))
-            pygame.draw.rect(win, light_black, (420, 520, 150, 50))
+            pygame.draw.rect(win, white, (420, 580, 150, 50),2)
+            pygame.draw.rect(win, white, (420, 460, 150, 50),2)
+            pygame.draw.rect(win, white, (420, 520, 150, 50),2)
             message_display2('Controls', (420 + 420 + 150) /
                              2, (580 + 580 + 50) / 2, black)
             message_display2('Start', (420 + 420 + 150) /
@@ -638,8 +638,6 @@ def countdown(playerimage):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-        time.sleep(10)
-        gameloop(playerimage)
         time.sleep(0.1)
         testing1()
         untesting()
@@ -657,7 +655,7 @@ def countdown(playerimage):
         message_display('GO!!', display_height / 2, 300, black)
         clock.tick(1)
         pygame.display.update()
-
+        gameloop(playerimage)
 def gameloop2(playerimage):
     score = 0  # score
     player_speed = 4
