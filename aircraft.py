@@ -176,6 +176,7 @@ def scoreboard():
     word1 = line1.split()
     line = f.read()
     word = line.split()
+
     font = pygame.font.Font('comic.ttf', 40)
     while True:
         for e in pygame.event.get():
@@ -187,7 +188,7 @@ def scoreboard():
         message_display2('Player_name', 185, 273, black)
         message_display2('Score', 510, 273, black)
         x = [473, 473, 473, 473, 473, 473]
-        y = [304, 310 + 40,310+40+50, 310 + 40 + 40 + 54,
+        y = [304, 310 + 40, 310 + 40 + 50, 310 + 40 + 40 + 54,
              310 + 40 + 40 + 30 + 25, 310 + 40 + 40 + 30 + 60 + 100]
 
         x1 = [104, 104, 104, 104, 104]
@@ -281,8 +282,8 @@ def crash12(playerimage, score):
         if 430 < mouse[0] < 430 + 150 and 450 < mouse[1] < 50 + 450:
             pygame.draw.rect(win, low_black, (420, 430, 150, 50))
             pygame.draw.rect(win, light_black, (420, 570, 150, 50))
-            message_display2('Scoreboard', (420+420 + 150) /
-                             2, (570+570+50)/2, green)
+            message_display2('Scoreboard', (420 + 420 + 150) /
+                             2, (570 + 570 + 50) / 2, green)
             message_display2('Play Again', (420 + 420 + 150) /
                              2, (430 + 430 + 50) / 2, green)
             pygame.draw.rect(win, light_black, (420, 500, 150, 50))
@@ -292,8 +293,8 @@ def crash12(playerimage, score):
             pygame.draw.rect(win, light_black, (420, 430, 150, 50))
             pygame.draw.rect(win, low_black, (420, 500, 150, 50))
             pygame.draw.rect(win, light_black, (420, 570, 150, 50))
-            message_display2('Scoreboard', (420+420 + 150) /
-                             2, (570+570+50)/2, green)
+            message_display2('Scoreboard', (420 + 420 + 150) /
+                             2, (570 + 570 + 50) / 2, green)
             message_display2('Quit', (420 + 420 + 150) / 2,
                              (500 + 500 + 50) / 2, green)
             message_display2('Play Again', (420 + 420 + 150) /
@@ -302,8 +303,8 @@ def crash12(playerimage, score):
             pygame.draw.rect(win, light_black, (420, 430, 150, 50))
             pygame.draw.rect(win, light_black, (420, 500, 150, 50))
             pygame.draw.rect(win, low_black, (420, 570, 150, 50))
-            message_display2('Scoreboard', (420+420 + 150) /
-                             2, (570+570+50)/2, green)
+            message_display2('Scoreboard', (420 + 420 + 150) /
+                             2, (570 + 570 + 50) / 2, green)
             message_display2('Quit', (420 + 420 + 150) / 2,
                              (500 + 500 + 50) / 2, green)
             message_display2('Play Again', (420 + 420 + 150) /
@@ -312,8 +313,8 @@ def crash12(playerimage, score):
             pygame.draw.rect(win, light_black, (420, 430, 150, 50))
             pygame.draw.rect(win, light_black, (420, 500, 150, 50))
             pygame.draw.rect(win, light_black, (420, 570, 150, 50))
-            message_display2('Scoreboard', (420+420 + 150) /
-                             2, (570+570+50)/2, green)
+            message_display2('Scoreboard', (420 + 420 + 150) /
+                             2, (570 + 570 + 50) / 2, green)
             message_display2('Play Again', (420 + 420 + 150) /
                              2, (430 + 430 + 50) / 2, green)
             message_display2('Quit', (420 + 420 + 150) / 2,
@@ -369,7 +370,7 @@ def playerinput(playerimage):
             if events.type == pygame.MOUSEBUTTONDOWN:
                 if p.collidepoint(events.pos):
                     active = True
-                    color = green
+                    color = red
                 else:
                     active = False
                     color = black
@@ -583,7 +584,7 @@ def gameintro(playerimage):
         click = pygame.mouse.get_pressed()
         if click[0] == 1 and 420 < mouse[0] < 420 + 150 and 450 < mouse[1] < 50 + 450 or keys[pygame.K_s]:
             # pygame.mixer.Sound.play(button)
-            gameloop(playerimage)
+            countdown(playerimage)
         elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50 or keys[pygame.K_q]:
             pygame.mixer.Sound.play(button)
             pygame.quit()
@@ -611,69 +612,172 @@ def iscollision(playerimage, bulletx, bullety, playerx, playery):
     collision = math.sqrt(math.pow((playerx - bulletx), 2) +
                           math.pow((playery - bullety), 2))
     return collision
-
+testing = True
+def untesting():
+    global testing
+    testing = False
+def testing1():
+    while testing:
+        win.fill(white)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        message_display('3', display_height / 2, 300, black)
+        clock.tick(1)
+        untesting()
+def countdown(playerimage):
+    countdown = True
+    while countdown:
+        win.fill(white)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        testing1()
+        untesting()
+        pygame.display.update()
+        clock.tick(1)
+        win.fill(white)
+        message_display('2', display_height / 2, 300, black)
+        pygame.display.update()
+        clock.tick(1)
+        win.fill(white)
+        message_display('1', display_height / 2, 300, black)
+        pygame.display.update()
+        clock.tick(1)
+        win.fill(white)
+        message_display('GO!!', display_height / 2, 300, black)
+        clock.tick(1)
+        pygame.display.update()
+        gameloop(playerimage)
 
 def gameloop2(playerimage):
-    score = 0
-    running = True
-    player_speed = 7
+    score = 0  # score
+    player_speed = 4
     cloud_speed = 5
-    global bullet_state
+    player_bullet_speed = 5
+    bullet_speed = 5
+    global bullet_state  # initialising global num_bullet
+    global pause
     bullet_state = 'ready'
+    x = 0
     rect.x = 10
-    rect.y = display_height / 2 - 200
-    bullet_speed = 7
+    rect.y = int(display_height / 2 - 200)
+    square.x = rect.x
+    square.y = rect.y
+    bulletx = []
+    bullety = []
+    num_bullet = 9
+    for i in range(num_bullet - 1):
+        a = random.randint(1000, 1500)
+        b = random.randint(0, 650)
+        bulletx.append(a)
+        bullety.append(b)
     pygame.mixer.music.play(-1)
-    while running:
-        win.fill(white)
-
-        win.blit(back, rect1)
-        win.blit(back1, rect2)
-        win.blit(playerimage, rect)
-        po = []
+    while True:
+        win.fill(white)  # filling background with white
+        scorelist = []
+        win.blit(back, rect1)  # blitting images
+        win.blit(back1, rect2)  # blitting images
+        win.blit(playerimage, rect)  # blitting images
+        list = []
         for i in range(num_bullet - 1):
-            po.append(bulletlist[i].get_rect())
+            list.append(bulletlist[i].get_rect())
         for i in range(num_bullet - 1):
             win.blit(bulletlist[i], (bulletx[i], bullety[i]))
             bulletx[i] -= bullet_speed
             if bulletx[i] <= 0:
+                # after the bullet moving out of the windows and then bltting it again at a diff pos
                 bulletx[i] = random.randint(1000, 1500)
-
+                bullety[i] = random.randint(0 + i, 700)
+        # score for the game
+        score += 1 / 100
+        # getting all the events in pygame window
         for events in pygame.event.get():
             if events.type == pygame.QUIT:
+                scorelist.append(score)
                 pygame.quit()
                 sys.exit()
-
+            if events.type == pygame.KEYDOWN:
+                if events.key == pygame.K_SPACE:
+                    if bullet_state is 'ready':
+                        square.x = rect.x
+                        square.y = rect.y
+                        fire(player_bullet, square.x, square.y)
+        # Bullet movement
+        if bullet_state == 'fire':
+            fire(player_bullet, square.x, square.y)
+            square.x += player_bullet_speed
+        if square.x > 1000:
+            square.x = rect.x
+            test1()
         keys = pygame.key.get_pressed()
+        # player movement
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             rect.y += player_speed
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             rect.y -= player_speed
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             rect.x += player_speed
 
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             rect.x -= player_speed
-
+        # pause function
+        if keys[pygame.K_ESCAPE]:
+            pause = True
+            pygame.mixer.music.pause()
+            escape(playerimage)
         if rect.x < 0:
             rect.x = 0
         if rect.y < 0:
             rect.y = 0
         if rect.y > display_width - player.get_rect().height:
             rect.y = display_width - player.get_rect().height
-        for i in range(num - 1):
+
+        # cloud movement
+        for i in range(num - 1):  # displaying clouds
             win.blit(cloud1[i], (cloud_x[i], cloud_y[i]))
             cloud_x[i] -= cloud_speed
             if cloud_x[i] < 0 - cloud1[i].get_rect().width:
                 cloud_x[i] = random.randint(1000, 1500)
-        score += 0.01
         scoreimage(int(score))
+        list23 = []
+        for i in range(9 - 1):
+            list23.append(bulletlist[i].get_rect())
+        for i in range(9 - 1):  # collision
+            testing = iscollision(
+                playerimage, bulletx[i], bullety[i], rect.x, rect.y)
+            if testing < 27:
+                scorelist.append(str(int(score)))
+                f2 = open('score.txt', 'r')
+                line2 = f2.read()
+                word2 = line2.split()
+                h = open('highscore.bin', 'wb')
+                pickle.dump(scorelist, h)
+                h.close()
+                for t in scorelist:
+                    if len(word2) > 5:
+                        f2 = open('score.txt', 'w')
+                        f2.write(t)
+                        f2.write('\n')
+
+                    else:
+                        f2 = open('score.txt', 'a')
+                        f2.write(t)
+                        f2.write('\n')
+                    f2.close()
+                pygame.mixer.music.pause()
+                crash12(playerimage, int(score))
+        # bullet collision with the player bullet
         for i in range(num_bullet - 1):
-            if rect.x > bulletx[i] and rect.x + player.get_rect().width:
-                if rect.y < bullety[i] and rect.y + player.get_rect().height > bullety[i]:
-                    pygame.mixer.music.pause()
-                    crash12(playerimage, int(score))
-        pygame.display.update()  # 2nd level loop
+            if square.colliderect(list23[i]):
+                test1()
+                bulletx[i] = random.randint(1000, 1500)
+                bullety[i] = random.randint(50, 700)
+        if score > 50:  # creating a 2nd level
+            won(playerimage)
+        pygame.display.update()
 
 
 def gameloop(playerimage):  # mainloop
