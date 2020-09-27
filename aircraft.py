@@ -14,7 +14,8 @@ pygame.init()
 clock = pygame.time.Clock()
 display_height = 1000
 display_width = 700
-win = pygame.display.set_mode((display_height, display_width))# creating window
+win = pygame.display.set_mode(
+    (display_height, display_width))  # creating window
 
 # loading all images
 icon = pygame.image.load('player.png')
@@ -23,14 +24,14 @@ player = pygame.image.load('player.png')
 bullet3 = pygame.image.load('bullet1.png')
 player_bullet = pygame.image.load('bullet.png')
 #  loaded background
-back = pygame.image.load('back.png')
-back1 = pygame.image.load('back.png')
+back = pygame.image.load('back.png').convert_alpha()
+back1 = pygame.image.load('back.png').convert_alpha()
 crashimage = pygame.image.load('gameover.png')
 input_back = pygame.image.load('input_back.png')
 game_intro = pygame.image.load('background.png')
 table = pygame.image.load('Capture.PNG')
 
-#intialising icon for pygame window
+# intialising icon for pygame window
 icon1 = pygame.display.set_icon(icon)
 
 # getting the player size
@@ -52,14 +53,14 @@ rect1.y = 0
 # to display the name of the player after player crashes
 name = []
 
-#loading all sounds and music
+# loading all sounds and music
 button = pygame.mixer.Sound('BUTTON.wav')
 pygame.mixer.music.load('music.mp3')
 crash_sound = pygame.mixer.Sound('crash.wav')
 
 # loaded intro background
 user_text1 = ' '
-#background
+# background
 rect2 = back1.get_rect()
 rect2.x = 0
 rect2.y = 0
@@ -113,10 +114,6 @@ def unpaused():
     pause = False
 
 
-
-
-
-
 # create a function to fire bullet
 
 
@@ -128,13 +125,12 @@ def fire(bullet, x, y):
 
 # to change the bullet_state
 
-
 def test1():
     global bullet_state
     bullet_state = 'ready'
 
-
 # created a function to display text
+
 
 def text_object(text, font, color):
     textsurf = font.render(text, True, color)
@@ -154,7 +150,6 @@ def message_display1(text, a, b, color):
     textsurf, textrect = text_object(text, largetext, color)
     textrect.center = (int(a), int(b))
     win.blit(textsurf, textrect)
-
 
 # added message display function to blit text on to the window
 
@@ -180,7 +175,7 @@ def scoreboard():
     word1 = line1.split()
     line = f.read()
     word = line.split()
-    font = pygame.font.Font('comic.ttf', 32)
+    font = pygame.font.Font('comic.ttf', 40)
     while True:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
@@ -208,109 +203,56 @@ def scoreboard():
             score12.append(font.render(p, True, (0, 0, 0)))
 
         if len(word) == 1:
-            xnew.append(x[0])
-            ynew.append(y[0])
-            xnew1.append(x1[0])
-            ynew1.append(y1[0])
-            win.blit(score12[0], (xnew[0], ynew[0]))
-            win.blit(list[0], (xnew1[0], ynew1[0]))
+            xnew.clear()
+            ynew.clear()
+            for i in range(1):
+                xnew.append(x[i])
+                ynew.append(y[i])
+                xnew1.append(x1[i])
+                ynew1.append(y1[i])
+                win.blit(score12[i], (xnew[i], ynew[i]))
+                win.blit(list[i], (xnew1[i], ynew1[i]))
 
         if len(word) == 2:
             xnew.clear()
             ynew.clear()
-            xnew.append(x[0])
-            xnew.append(x[1])
-            ynew.append(y[0])
-            ynew.append(y[1])
-            xnew1.append(x1[0])
-            ynew1.append(y1[0])
-            xnew1.append(x1[1])
-            ynew1.append(y1[1])
-            win.blit(score12[0], (xnew[0], ynew[0]))
-            win.blit(score12[0], (xnew[1], ynew[1]))
-            win.blit(list[0], (xnew1[0], ynew1[0]))
-            win.blit(list[1], (xnew1[1], ynew1[1]))
+            for i in range(2):
+                xnew.append(x[i])
+                ynew.append(y[i])
+                xnew1.append(x1[i])
+                ynew1.append(y1[i])
+                win.blit(score12[i], (xnew[i], ynew[i]))
+                win.blit(list[i], (xnew1[i], ynew1[i]))
         if len(word) == 3:
             xnew.clear()
             ynew.clear()
-            xnew.append(x[0])
-            xnew.append(x[1])
-            xnew.append(x[2])
-            ynew.append(y[0])
-            ynew.append(y[1])
-            ynew.append(y[2])
-            xnew1.append(x1[0])
-            ynew1.append(y1[0])
-            xnew1.append(x1[1])
-            ynew1.append(y1[1])
-            xnew1.append(x1[2])
-            ynew1.append(y1[2])
-            win.blit(score12[0], (xnew[0], ynew[0]))
-            win.blit(score12[1], (xnew[1], ynew[1]))
-            win.blit(score12[2], (xnew[2], ynew[2]))
-            win.blit(list[0], (xnew1[0], ynew1[0]))
-            win.blit(list[1], (xnew1[1], ynew1[1]))
-            win.blit(list[2], (xnew1[2], ynew1[2]))
+            for i in range(3):
+                xnew.append(x[i])
+                ynew.append(y[i])
+                xnew1.append(x1[i])
+                ynew1.append(y1[i])
+                win.blit(score12[i], (xnew[i], ynew[i]))
+                win.blit(list[i], (xnew1[i], ynew1[i]))
         if len(word) == 4:
             xnew.clear()
             ynew.clear()
-            xnew.append(x[0])
-            xnew.append(x[1])
-            xnew.append(x[2])
-            xnew.append(x[3])
-            ynew.append(y[0])
-            ynew.append(y[1])
-            ynew.append(y[2])
-            ynew.append(y[3])
-            xnew1.append(x1[0])
-            ynew1.append(y1[0])
-            xnew1.append(x1[1])
-            ynew1.append(y1[1])
-            xnew1.append(x1[2])
-            ynew1.append(y1[2])
-            xnew1.append(x1[3])
-            ynew1.append(y1[3])
-            win.blit(score12[0], (xnew[0], ynew[0]))
-            win.blit(score12[1], (xnew[1], ynew[1]))
-            win.blit(score12[2], (xnew[2], ynew[2]))
-            win.blit(score12[3], (xnew[3], ynew[3]))
-            win.blit(list[0], (xnew1[0], ynew1[0]))
-            win.blit(list[1], (xnew1[1], ynew1[1]))
-            win.blit(list[2], (xnew1[2], ynew1[2]))
-            win.blit(list[3], (xnew1[3], ynew1[3]))
+            for i in range(4):
+                xnew.append(x[i])
+                ynew.append(y[i])
+                xnew1.append(x1[i])
+                ynew1.append(y1[i])
+                win.blit(score12[i], (xnew[i], ynew[i]))
+                win.blit(list[i], (xnew1[i], ynew1[i]))
         if len(word) == 5:
             xnew.clear()
             ynew.clear()
-            xnew.append(x[0])
-            xnew.append(x[1])
-            xnew.append(x[2])
-            xnew.append(x[3])
-            xnew.append(x[4])
-            ynew.append(y[0])
-            ynew.append(y[1])
-            ynew.append(y[2])
-            ynew.append(y[3])
-            ynew.append(y[4])
-            xnew1.append(x1[0])
-            ynew1.append(y1[0])
-            xnew1.append(x1[1])
-            ynew1.append(y1[1])
-            xnew1.append(x1[2])
-            ynew1.append(y1[2])
-            xnew1.append(x1[3])
-            ynew1.append(y1[3])
-            xnew1.append(x1[4])
-            ynew1.append(y1[4])
-            win.blit(score12[0], (xnew[0], ynew[0]))
-            win.blit(score12[1], (xnew[1], ynew[1]))
-            win.blit(score12[2], (xnew[2], ynew[2]))
-            win.blit(score12[3], (xnew[3], ynew[3]))
-            win.blit(score12[4], (xnew[4], ynew[4]))
-            win.blit(list[0], (xnew1[0], ynew1[0]))
-            win.blit(list[1], (xnew1[1], ynew1[1]))
-            win.blit(list[2], (xnew1[2], ynew1[2]))
-            win.blit(list[3], (xnew1[3], ynew1[3]))
-            win.blit(list[4], (xnew1[4], ynew1[4]))
+            for i in range(5):
+                xnew.append(x[i])
+                ynew.append(y[i])
+                xnew1.append(x1[i])
+                ynew1.append(y1[i])
+                win.blit(score12[i], (xnew[i], ynew[i]))
+                win.blit(list[i], (xnew1[i], ynew1[i]))
 
         mouse = pygame.mouse.get_pos()
         print(mouse)
@@ -391,7 +333,7 @@ def playerinput(playerimage):
         rect_x = 450
         rect_y = 300
         text_surface = basic_font.render(user_text, True, black)
-        win.blit(text_surface, (rect_x +4, rect_y + 4))
+        win.blit(text_surface, (rect_x + 4, rect_y + 4))
         a = max(100, text_surface.get_width() + 10)
         if a > 120:
             rect.x -= 0.5
@@ -750,9 +692,9 @@ def gameloop(playerimage):  # mainloop
                 # after the bullet moving out of the windows and then bltting it again at a diff pos
                 bulletx[i] = random.randint(1000, 1500)
                 bullety[i] = random.randint(0 + i, 700)
-        #score for the game
+        # score for the game
         score += 1 / 100
-        #getting all the events in pygame window
+        # getting all the events in pygame window
         for events in pygame.event.get():
             if events.type == pygame.QUIT:
                 pygame.quit()
@@ -763,8 +705,15 @@ def gameloop(playerimage):  # mainloop
                         square.x = rect.x
                         square.y = rect.y
                         fire(player_bullet, square.x, square.y)
-        keys = pygame.key.get_pressed()  
-        #player movement
+        # Bullet movement
+        if bullet_state == 'fire':
+            fire(player_bullet, square.x, square.y)
+            square.x += player_bullet_speed
+        if square.x > 1000:
+            square.x = rect.x
+            test1()
+        keys = pygame.key.get_pressed()
+        # player movement
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             rect.y += player_speed
         if keys[pygame.K_UP] or keys[pygame.K_w]:
@@ -778,25 +727,16 @@ def gameloop(playerimage):  # mainloop
             pause = True
             pygame.mixer.music.pause()
             escape(playerimage)
-            
-        # Bullet movement
-        if bullet_state == 'fire':
-            fire(player_bullet, square.x, square.y)
-            square.x += player_bullet_speed
-        if square.x > 1000:
-            square.x = rect.x
-            test1()
-            
-        #player movement
+
+        # player movement
         if rect.x < 0:
             rect.x = 0
         if rect.y < 0:
             rect.y = 0
         if rect.y > display_width - player.get_rect().height:
             rect.y = display_width - player.get_rect().height
-            
-        
-        #cloud movement
+
+        # cloud movement
         for i in range(num - 1):  # displaying clouds
             win.blit(cloud1[i], (cloud_x[i], cloud_y[i]))
             cloud_x[i] -= cloud_speed
@@ -804,6 +744,9 @@ def gameloop(playerimage):  # mainloop
                 cloud_x[i] = random.randint(1000, 1500)
         scorelist = []
         scoreimage(int(score))
+        list23 = []
+        for i in range(9 - 1):
+            list23.append(bulletlist[i].get_rect())
         for i in range(9 - 1):  # collision
             testing = iscollision(
                 playerimage, bulletx[i], bullety[i], rect.x, rect.y)
@@ -825,16 +768,16 @@ def gameloop(playerimage):  # mainloop
                     f2.close()
                 pygame.mixer.music.pause()
                 crash12(playerimage, int(score))
-        #bullet collision with the player bullet
-        for i in range(num_bullet-1):
-            checking_collision = iscollision(playerimage,bulletx[i],bullety[i],square.x,square.y)
-            if checking_collision < 27:
-                    test1()
-                    bulletx[i] = random.randint(1000, 1500)
-                    bullety[i] = random.randint(0 + i, 700)   
+        # bullet collision with the player bullet
+        for i in range(num_bullet - 1):
+            if square.colliderect(list23[i]):
+                test1()
+                bulletx[i] = random.randint(1000, 1500)
+                bullety[i] = random.randint(50, 700)
         if score > 50:  # creating a 2nd level
             won(playerimage)
         pygame.display.update()
+
 
 clock.tick(200)  # setting the fps
 playerinput(player)  # called the function playerinput the enter the name
