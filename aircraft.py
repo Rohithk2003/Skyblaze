@@ -91,6 +91,7 @@ cloud_y = [534, 124, 321, 546, 123, 491]
 for i in range(num - 1):
     cloud1.append(pygame.image.load('cloud.png'))
 
+
 # creating bullet list
 bulletlist = []
 bulletx = []
@@ -186,11 +187,11 @@ def scoreboard():
         message_display2('Player_name', 185, 273, black)
         message_display2('Score', 510, 273, black)
         x = [473, 473, 473, 473, 473, 473]
-        y = [310, 310 + 40, 310 + 40 + 40, 310 + 40 + 40 + 30,
-             310 + 40 + 40 + 30 + 25, 310 + 40 + 40 + 30 + 25 + 40]
+        y = [304, 310 + 40,310+40+50, 310 + 40 + 40 + 54,
+             310 + 40 + 40 + 30 + 25, 310 + 40 + 40 + 30 + 60 + 100]
 
         x1 = [104, 104, 104, 104, 104]
-        y1 = [303, 350, 350 + 40, 350 + 40 + 40, 350 + 40 + 40 + 40]
+        y1 = [300, 350, 350 + 40, 350 + 40 + 55, 350 + 40 + 40 + 57]
         xnew = []
         ynew = []
         xnew1 = []
@@ -700,7 +701,7 @@ def gameloop(playerimage):  # mainloop
     pygame.mixer.music.play(-1)
     while True:
         win.fill(white)  # filling background with white
-
+        scorelist = []
         win.blit(back, rect1)  # blitting images
         win.blit(back1, rect2)  # blitting images
         win.blit(playerimage, rect)  # blitting images
@@ -719,6 +720,7 @@ def gameloop(playerimage):  # mainloop
         # getting all the events in pygame window
         for events in pygame.event.get():
             if events.type == pygame.QUIT:
+                scorelist.append(score)
                 pygame.quit()
                 sys.exit()
             if events.type == pygame.KEYDOWN:
@@ -763,7 +765,6 @@ def gameloop(playerimage):  # mainloop
             cloud_x[i] -= cloud_speed
             if cloud_x[i] < 0 - cloud1[i].get_rect().width:
                 cloud_x[i] = random.randint(1000, 1500)
-        scorelist = []
         scoreimage(int(score))
         list23 = []
         for i in range(9 - 1):
