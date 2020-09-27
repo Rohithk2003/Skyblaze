@@ -5,7 +5,7 @@ import random
 import sys
 
 import pygame
-import pickle 
+import pickle
 
 
 # to create countdown
@@ -187,7 +187,8 @@ def scoreboard():
         message_display2('Player_name', 185, 273, black)
         message_display2('Score', 510, 273, black)
         x = [473, 473, 473, 473, 473, 473]
-        y = [310, 310 + 40, 310 + 40 + 40, 310 + 40 + 40 + 30, 310 + 40 + 40 + 30 + 25, 310 + 40 + 40 + 30 + 25 + 40]
+        y = [310, 310 + 40, 310 + 40 + 40, 310 + 40 + 40 + 30,
+             310 + 40 + 40 + 30 + 25, 310 + 40 + 40 + 30 + 25 + 40]
 
         x1 = [104, 104, 104, 104, 104]
         y1 = [303, 350, 350 + 40, 350 + 40 + 40, 350 + 40 + 40 + 40]
@@ -736,7 +737,8 @@ def gameloop(playerimage):  # mainloop
             win.blit(bulletlist[i], (bulletx[i], bullety[i]))
             bulletx[i] -= bullet_speed
             if bulletx[i] <= 0:
-                bulletx[i] = random.randint(1000, 1500)#after the bullet moving out of the windows and then bltting it again at a diff pos
+                # after the bullet moving out of the windows and then bltting it again at a diff pos
+                bulletx[i] = random.randint(1000, 1500)
                 bullety[i] = random.randint(0 + i, 700)
 
         score += 1 / 100
