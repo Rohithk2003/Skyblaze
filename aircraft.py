@@ -1,12 +1,11 @@
 # importing all modules
 import math
 import os
+import pickle
 import random
 import sys
 
 import pygame
-import pickle
-
 
 # to create countdown
 time1 = True
@@ -26,6 +25,8 @@ icon1 = pygame.display.set_icon(icon)
 caption = pygame.display.set_caption('Jet shooter')
 player = pygame.image.load('player.png')
 bullet3 = pygame.image.load('bullet1.png')
+player_bullet = pygame.image.load('bullet.png')
+square = player_bullet.get_rect()
 
 # getting the player size
 player_size = player.get_size()
@@ -70,7 +71,7 @@ bright_blue = (0, 0, 200)
 cloud1 = []
 low_black = (26, 25, 27)
 light_black = (43, 43, 45)
-
+# player_bullet
 num = 5
 table = pygame.image.load('Capture.PNG')
 button = pygame.mixer.Sound('BUTTON.wav')
@@ -96,7 +97,6 @@ for i in range(num_bullet - 1):
     bullety.append(b)
 bullet_x = []
 bullet_state = 'ready'
-bullet_state1 = 'ready'
 
 
 # added a unpause function to exit pause fucntion
@@ -116,7 +116,7 @@ name = []
 # create a function to fire bullet
 
 
-def fire2(bullet, x, y):
+def fire(bullet, x, y):
     global bullet_state
     bullet_state = 'fire'
     win.blit(bullet, (x + 16, y + 16))
@@ -126,8 +126,8 @@ def fire2(bullet, x, y):
 
 
 def test1():
-    global bullet_state1
-    bullet_state1 = 'ready'
+    global bullet_state
+    bullet_state = 'ready'
 
 
 # created a function to display text
@@ -480,6 +480,8 @@ def controls(playerimage):
 
 
 # score function
+
+
 def scoreimage(text):
     font = pygame.font.Font('comic.ttf', 30)
     img2 = font.render('Score:' + str(text), True, (0, 0, 0))
@@ -715,6 +717,8 @@ def gameloop(playerimage):  # mainloop
     global pause
     bullet_speed = 6
     x = 0
+    square.x = rect.x
+    square.y = rect.y
     bulletx = []
     bullety = []
     num_bullet = 9
@@ -746,7 +750,12 @@ def gameloop(playerimage):  # mainloop
             if events.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
+            if events.type == pygame.KEYDOWN:
+                if events.key == pygame.K_SPACE:
+                    if bullet_state is 'ready':
+                        square.x = rect.x
+                        square.y = rect.y
+                        fire(player_bullet, square.x, square.y)
         keys = pygame.key.get_pressed()  # getting all the key  that is pressed
         if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             rect.y += player_speed
@@ -761,13 +770,23 @@ def gameloop(playerimage):  # mainloop
             pause = True
             pygame.mixer.music.pause()
             escape(playerimage)
-
+        # Bullet movement
+        if bullet_state == 'fire':
+            fire(player_bullet, square.x, square.y)
+            square.x += 3
+        if square.x > 1000:
+            square.x = rect.x
+            test1()
+        #player movement
         if rect.x < 0:
             rect.x = 0
         if rect.y < 0:
             rect.y = 0
         if rect.y > display_width - player.get_rect().height:
             rect.y = display_width - player.get_rect().height
+            
+        
+        
         for i in range(num - 1):  # displaying clouds
             win.blit(cloud1[i], (cloud_x[i], cloud_y[i]))
             cloud_x[i] -= cloud_speed
@@ -796,6 +815,13 @@ def gameloop(playerimage):  # mainloop
                     f2.close()
                 pygame.mixer.music.pause()
                 crash12(playerimage, int(score))
+        #bullet collision with the player bullet
+        for i in range(num_bullet-1):
+            checking_collision = iscollision(playerimage,bulletx[i],bullety[i],square.x,square.y)
+            if checking_collision < 27:
+                    test1()
+                    bulletx[i] = random.randint(1000, 1500)
+                    bullety[i] = random.randint(0 + i, 700)   
         if score > 50:  # creating a 2nd level
             won(playerimage)
         pygame.display.update()
