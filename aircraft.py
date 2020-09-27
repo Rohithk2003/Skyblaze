@@ -5,7 +5,7 @@ import random
 import sys
 
 import pygame
-
+import pickle 
 
 
 # to create countdown
@@ -617,7 +617,7 @@ def gameintro(playerimage):
             quit()
         elif click[0] == 1 and 420 < mouse[0] < 420 + 150 and 580 < mouse[1] < 580 + 50:
             pygame.mixer.Sound.play(button)
-            root.mainloop()
+            controls()
         pygame.display.update()
 
 
