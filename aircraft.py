@@ -726,7 +726,7 @@ def gameloop2(playerimage):
                 sys.exit()
             if events.type == pygame.KEYDOWN:
                 if events.key == pygame.K_SPACE:
-                    if bullet_state is 'ready':
+                    if bullet_state == 'ready':
                         square.x = rect.x
                         square.y = rect.y
                         fire(player_bullet, square.x, square.y)
