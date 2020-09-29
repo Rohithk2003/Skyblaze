@@ -57,7 +57,7 @@ name = []
 button = pygame.mixer.Sound('BUTTON.wav')
 pygame.mixer.music.load('music.mp3')
 crash_sound = pygame.mixer.Sound('crash.wav')
-
+countdown_music = pygame.mixer.Sound('countdown.wav')
 # loaded intro background
 user_text1 = ' '
 # background
@@ -160,6 +160,7 @@ def message_display2(text, a, b, color):
     textsurf, textrect = text_object(text, smalltext, color)
     textrect.center = (int(a), int(b))
     win.blit(textsurf, textrect)
+
 
 def message_display_small(text, a, b, color):
     smalltext = pygame.font.Font('font.ttf', 15)
@@ -288,42 +289,42 @@ def crash12(playerimage, score):
             pygame.draw.rect(win, low_black, (420, 430, 150, 50))
             pygame.draw.rect(win, light_black, (420, 570, 150, 50))
             message_display_small('Scoreboard', (420 + 420 + 150) /
-                             2, (570 + 570 + 50) / 2, green)
+                                  2, (570 + 570 + 50) / 2, green)
             message_display_small('Play Again', (420 + 420 + 150) /
-                             2, (430 + 430 + 50) / 2, green)
+                                  2, (430 + 430 + 50) / 2, green)
             pygame.draw.rect(win, light_black, (420, 500, 150, 50))
             message_display_small('Quit', (420 + 420 + 150) / 2,
-                             (500 + 500 + 50) / 2, green)
+                                  (500 + 500 + 50) / 2, green)
         elif 420 < mouse[0] < 420 + 150 and 520 < mouse[1] < 520 + 50:
             pygame.draw.rect(win, light_black, (420, 430, 150, 50))
             pygame.draw.rect(win, low_black, (420, 500, 150, 50))
             pygame.draw.rect(win, light_black, (420, 570, 150, 50))
             message_display_small('Scoreboard', (420 + 420 + 150) /
-                             2, (570 + 570 + 50) / 2, green)
+                                  2, (570 + 570 + 50) / 2, green)
             message_display_small('Quit', (420 + 420 + 150) / 2,
-                             (500 + 500 + 50) / 2, green)
+                                  (500 + 500 + 50) / 2, green)
             message_display_small('Play Again', (420 + 420 + 150) /
-                             2, (430 + 430 + 50) / 2, green)
+                                  2, (430 + 430 + 50) / 2, green)
         elif 420 < mouse[0] < 420 + 150 and 570 < mouse[1] < 570 + 50:
             pygame.draw.rect(win, light_black, (420, 430, 150, 50))
             pygame.draw.rect(win, light_black, (420, 500, 150, 50))
             pygame.draw.rect(win, low_black, (420, 570, 150, 50))
             message_display_small('Scoreboard', (420 + 420 + 150) /
-                             2, (570 + 570 + 50) / 2, green)
+                                  2, (570 + 570 + 50) / 2, green)
             message_display_small('Quit', (420 + 420 + 150) / 2,
-                             (500 + 500 + 50) / 2, green)
+                                  (500 + 500 + 50) / 2, green)
             message_display_small('Play Again', (420 + 420 + 150) /
-                             2, (430 + 430 + 50) / 2, green)
+                                  2, (430 + 430 + 50) / 2, green)
         else:
             pygame.draw.rect(win, light_black, (420, 430, 150, 50))
             pygame.draw.rect(win, light_black, (420, 500, 150, 50))
             pygame.draw.rect(win, light_black, (420, 570, 150, 50))
             message_display_small('Scoreboard', (420 + 420 + 150) /
-                             2, (570 + 570 + 50) / 2, green)
+                                  2, (570 + 570 + 50) / 2, green)
             message_display_small('Play Again', (420 + 420 + 150) /
-                             2, (430 + 430 + 50) / 2, green)
+                                  2, (430 + 430 + 50) / 2, green)
             message_display_small('Quit', (420 + 420 + 150) / 2,
-                             (500 + 500 + 50) / 2, green)
+                                  (500 + 500 + 50) / 2, green)
         click = pygame.mouse.get_pressed()
         if click[0] == 1 and 420 < mouse[0] < 420 + 150 and 430 < mouse[1] < 50 + 430:
             pygame.mixer.Sound.play(button)
@@ -532,15 +533,27 @@ def escape(playerimage):
             controls(playerimage)
         pygame.display.update()
 
-
-def countdown_background(playerimage, cloudimage, bulletimage, cloudx, cloudy, bulletx, bullety, playerectx, playerrecty):
-    win.blit(back.png)
-    win.blit(playerimage, (playerectx, playerrecty))
-    win.blit(cloudimage, (cloudx, cloudy))
-    win.blit(bulletimage, (bulletx, bullety))
-
-
+def countdown_background(playerimage):
+    rect.x = 10
+    rect.y = int(display_height / 2 - 200)
+    square.x = rect.x
+    square.y = rect.y
+    bulletx = []
+    bullety = []
+    num_bullet = 9
+    for i in range(num_bullet - 1):
+        a = random.randint(1000, 1500)
+        b = random.randint(0, 650)
+        bulletx.append(a)
+        bullety.append(b)
+    win.fill(white)  # filling background with white
+    win.blit(back, rect1)  # blitting images
+    win.blit(back1, rect2)  # blitting images
+    win.blit(playerimage, rect)  # blitting
+    for i in range(num - 1):  # displaying clouds
+        win.blit(cloud1[i], (cloud_x[i], cloud_y[i]))
 def gameintro(playerimage):
+
     while True:
         win.blit(game_intro, (0, 0))
 
@@ -638,9 +651,10 @@ def untesting():
     testing = False
 
 
-def testing1():
+def testing1(playerimage):
     while testing:
         win.fill(white)
+        countdown_background(playerimage)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -654,30 +668,34 @@ def countdown(playerimage):
     countdown = True
     while countdown:
         win.fill(white)
+        pygame.mixer.Sound.play(countdown_music)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-        testing1()
+        testing1(playerimage)
         untesting()
         pygame.display.update()
         clock.tick(1)
         win.fill(white)
+        countdown_background(playerimage)
         message_display('2', display_height / 2, 300, black)
         pygame.display.update()
         clock.tick(1)
         win.fill(white)
+        countdown_background(playerimage)
         message_display('1', display_height / 2, 300, black)
         pygame.display.update()
         clock.tick(1)
         win.fill(white)
+        countdown_background(playerimage)
         message_display('GO!!', display_height / 2, 300, black)
         clock.tick(1)
-        pygame.display.update()
         gameloop(playerimage)
 
 
 def gameloop2(playerimage):
+
     score = 0  # score
     player_speed = 4
     cloud_speed = 5
@@ -700,6 +718,7 @@ def gameloop2(playerimage):
         bulletx.append(a)
         bullety.append(b)
     pygame.mixer.music.play(-1)
+
     while True:
         win.fill(white)  # filling background with white
         scorelist = []
