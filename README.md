@@ -16,5 +16,4 @@ Welcome to the Jet Shooting Game, a thrilling Pygame-based arcade experience whe
    ```bash
    pip install pygame
    git clone https://github.com/Rohithk2003/Skyblaze.git
-  cd Skyblaze
-  ```
+   
